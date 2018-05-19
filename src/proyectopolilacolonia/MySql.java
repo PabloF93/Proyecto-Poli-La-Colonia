@@ -8,15 +8,12 @@ package proyectopolilacolonia;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-/**
- *
- * @author Pablo2
- */
+
 public class MySql {
     
-    private static final String URL = "jdbc:mysql://localhost:3306/nombrebd";
-    private static final String USERNAME = "";
-    private static final String PASSWORD = "";
+    private static final String URL = "jdbc:mysql://localhost:3306/proyectolacolonia";
+    private static final String USERNAME = "root";
+    private static final String PASSWORD = "1234";
     
     public static Connection getConnection() {
         Connection conn = null;
