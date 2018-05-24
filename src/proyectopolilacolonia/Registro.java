@@ -15,7 +15,6 @@ import java.util.Date;
 public class Registro extends Entidad {
     private Date fechaHora;
     private Persona persona;
-    private TipoRegistro tipoReg;
             
     public Date getFechaHora() {
         return fechaHora;
@@ -33,19 +32,11 @@ public class Registro extends Entidad {
         this.persona = persona;
     }
 
-    public TipoRegistro getTipoReg() {
-        return tipoReg;
-    }
-
-    public void setTipoReg(TipoRegistro tipoReg) {
-        this.tipoReg = tipoReg;
-    }
     
     public Registro(Date fechaHora, Persona persona) {
         this.fechaHora = fechaHora;
         this.persona = persona;
     }
     
-    
-    
+      
 }

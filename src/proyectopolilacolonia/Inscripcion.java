@@ -5,26 +5,28 @@
  */
 package proyectopolilacolonia;
 
-import java.util.Date;
+import java.time.LocalDate;
+
 
 /**
  *
  * @author Moron
  */
 public class Inscripcion extends Entidad {
-    private Date fechaInscripcion; //dia mes año minutos y segundos de la inscripcion
+    private LocalDate fechaInscripcion; //dia mes año minutos y segundos de la inscripcion
     private int numeroComprobante;
-    private Deporte deporte;
+    private Clase inscripto;
     private Alumno alumno;
-    private Administrativo administrativo;
 
-    public Date getFechaInscripcion() {
+    public LocalDate getFechaInscripcion() {
         return fechaInscripcion;
     }
 
-    public void setFechaInscripcion(Date fechaInscripcion) {
+    public void setFechaInscripcion(LocalDate fechaInscripcion) {
         this.fechaInscripcion = fechaInscripcion;
     }
+
+
 
     public int getNumeroComprobante() {
         return numeroComprobante;
@@ -34,13 +36,6 @@ public class Inscripcion extends Entidad {
         this.numeroComprobante = numeroComprobante;
     }
 
-    public Deporte getDeporte() {
-        return deporte;
-    }
-
-    public void setDeporte(Deporte deporte) {
-        this.deporte = deporte;
-    }
 
     public Alumno getAlumno() {
         return alumno;
@@ -50,14 +45,12 @@ public class Inscripcion extends Entidad {
         this.alumno = alumno;
     }
 
-    public Administrativo getAdministrativo() {
-        return administrativo;
+    public Clase getInscripto() {
+        return inscripto;
     }
 
-    public void setAdministrativo(Administrativo administrativo) {
-        this.administrativo = administrativo;
-    }
-    
-    
+    public void setInscripto(Clase inscripto) {
+        this.inscripto = inscripto;
+    }    
     
 }

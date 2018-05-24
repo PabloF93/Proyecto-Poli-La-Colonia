@@ -15,7 +15,8 @@ public class PagoCuota extends Entidad{
     private Date fechaPago; //datos del momento donde se pago la cuota
     private Alumno alumno;
     private Deporte deporte;
-
+    private boolean pagado;
+            
     public Date getFechaPago() {
         return fechaPago;
     }

@@ -21,33 +21,12 @@ import java.time.ZoneOffset;
  * @author Moron
  */
 public class Alumno extends Persona {
-    
-    private int id; //hasta resolver duda del tipo de dato en clase Entidad.
-    //private String dni;
-    //private String nombreCompleto;
-    private int edad;
-    private String sexo;
-    private String observaciones;
-    
+        
     private LocalDateTime created_at;
-    private LocalDateTime updated_at;
-    private boolean deleted = false;
-    
+    private LocalDateTime updated_at;    
     private Connection conn = null;
     private PreparedStatement ps = null;
     private ResultSet rs = null;
-
-    public void setEdad(int edad) {
-        this.edad = edad;
-    }
-
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
-    }
-
-    public void setObservaciones(String observaciones) {
-        this.observaciones = observaciones;
-    }
 
     public void setCreated_at(LocalDateTime created_at) {
         this.created_at = created_at;
@@ -61,13 +40,6 @@ public class Alumno extends Persona {
         this.deleted = deleted;
     }
 
-    public int getEdad() {
-        return edad;
-    }
-
-    public String getObservaciones() {
-        return observaciones;
-    }
 
     public LocalDateTime getCreated_at() {
         return created_at;
