@@ -32,6 +32,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         JMenuItem_Alumnos_CRUD = new javax.swing.JMenuItem();
+        JMenuItem_Alumno_Observaciones = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -50,6 +51,14 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu3.add(JMenuItem_Alumnos_CRUD);
+
+        JMenuItem_Alumno_Observaciones.setText("Observaciones...");
+        JMenuItem_Alumno_Observaciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMenuItem_Alumno_ObservacionesActionPerformed(evt);
+            }
+        });
+        jMenu3.add(JMenuItem_Alumno_Observaciones);
 
         jMenuBar1.add(jMenu3);
 
@@ -74,6 +83,12 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         a1.setLocationRelativeTo(null);
         a1.setVisible(true);
     }//GEN-LAST:event_JMenuItem_Alumnos_CRUDActionPerformed
+
+    private void JMenuItem_Alumno_ObservacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuItem_Alumno_ObservacionesActionPerformed
+        Alumno_Observaciones ao1 = new Alumno_Observaciones();
+        ao1.setLocationRelativeTo(null);
+        ao1.setVisible(true);
+    }//GEN-LAST:event_JMenuItem_Alumno_ObservacionesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -111,6 +126,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem JMenuItem_Alumno_Observaciones;
     private javax.swing.JMenuItem JMenuItem_Alumnos_CRUD;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;

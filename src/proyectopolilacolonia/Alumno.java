@@ -62,7 +62,7 @@ public class Alumno extends Persona {
         
         try {
             
-            ps = conn.prepareStatement("SELECT dni,codTarjeta, nombreCompleto, fechaNacimiento, sexo, created_at, updated_at FROM alumnos WHERE deleted=false");
+            ps = conn.prepareStatement("SELECT id, dni,codTarjeta, nombreCompleto, fechaNacimiento, sexo, created_at, updated_at FROM alumnos WHERE deleted=false");
             rs = ps.executeQuery();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error: "+e.toString(), "Error", JOptionPane.ERROR);
@@ -77,7 +77,7 @@ public class Alumno extends Persona {
         conn = MySql.getConnection();
         try {
             
-            ps = conn.prepareStatement("SELECT dni, codTarjeta, nombreCompleto, fechaNacimiento, sexo, created_at, updated_at FROM alumnos WHERE dni=? AND deleted=false");
+            ps = conn.prepareStatement("SELECT id, dni, codTarjeta, nombreCompleto, fechaNacimiento, sexo, created_at, updated_at FROM alumnos WHERE dni=? AND deleted=false");
             
             ps.setString(1, dni);
             
@@ -85,13 +85,14 @@ public class Alumno extends Persona {
             
             while(rs.next()) {
                 
-                alumno.setDni(rs.getString(1));
-                alumno.setCodTarjeta(rs.getString(2));
-                alumno.setNombreCompleto(rs.getString(3));
-                alumno.setFechaNacimiento(rs.getDate(4).toLocalDate());
-                alumno.setSexo(rs.getString(5));
-                alumno.created_at = LocalDateTime.ofInstant(rs.getTimestamp(6).toInstant(), ZoneOffset.ofHours(0));
+                alumno.setId(rs.getInt(1));
+                alumno.setDni(rs.getString(2));
+                alumno.setCodTarjeta(rs.getString(3));
+                alumno.setNombreCompleto(rs.getString(4));
+                alumno.setFechaNacimiento(rs.getDate(5).toLocalDate());
+                alumno.setSexo(rs.getString(6));
                 alumno.created_at = LocalDateTime.ofInstant(rs.getTimestamp(7).toInstant(), ZoneOffset.ofHours(0));
+                alumno.created_at = LocalDateTime.ofInstant(rs.getTimestamp(8).toInstant(), ZoneOffset.ofHours(0));
             }
         } catch (Exception e) {
             //JOptionPane.showMessageDialog(null, "Error: No se encuentra el alumno con ese DNI. "+e.toString(), "¡Error!", JOptionPane.ERROR);
@@ -182,7 +183,7 @@ public class Alumno extends Persona {
         conn = MySql.getConnection();
         
         try {
-            ps = conn.prepareStatement("SELECT alumnos.nombreCompleto, observaciones_de_alumnos.contenido, observaciones_de_alumnos.created_at FROM observaciones_de_alumnos INNER JOIN alumnos WHERE alumnos.id = observaciones_de_alumnos.alumno_id AND alumnos.dni = ?");
+            ps = conn.prepareStatement("SELECT observaciones_de_alumnos.id ,alumnos.nombreCompleto, observaciones_de_alumnos.contenido, observaciones_de_alumnos.created_at, observaciones_de_alumnos.updated_at FROM observaciones_de_alumnos INNER JOIN alumnos WHERE alumnos.id = observaciones_de_alumnos.alumno_id AND alumnos.dni = ?");
             ps.setString(1, alumnoDni);
             rs = ps.executeQuery();
             
@@ -255,5 +256,7 @@ public class Alumno extends Persona {
             JOptionPane.showMessageDialog(null, "Error: "+e.toString(), "¡Error!", JOptionPane.ERROR_MESSAGE);
         }
     }
+    
+    
 }
     

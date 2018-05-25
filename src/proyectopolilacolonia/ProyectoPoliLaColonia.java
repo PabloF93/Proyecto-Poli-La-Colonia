@@ -20,30 +20,7 @@ public class ProyectoPoliLaColonia {
      */
     public static void main(String[] args) {
         
-//        Codigo de prueba
         
-//        Scanner teclado = new Scanner(System.in);
-//        Alumno alumno = new Alumno();
-//        
-//        alumno.setDni("37963374");
-//        alumno.setNombreCompleto("Pepito");
-//        alumno.setEdad(12);
-//        alumno.setSexo("Masculino");
-//        alumno.setObservaciones("Ninguna");
-//        alumno.setCreated_at(LocalDateTime.now());
-//        alumno.setUpdated_at(LocalDateTime.now());
-//        
-//        alumno.save(alumno);
-//            Alumno a = new Alumno();
-//            a.setDni("37963374");
-//            a.setCodTarjeta("37963374PabloFarina");
-//            a.setNombreCompleto("Pablo Farina");
-//            a.setFechaNacimiento(LocalDate.now());
-//            a.setSexo("Masculino");
-//            a.setCreated_at(LocalDateTime.now());
-//            a.setUpdated_at(LocalDateTime.now());
-//            a.setDeleted(false);
-//            a.save(a);
         
         
     }

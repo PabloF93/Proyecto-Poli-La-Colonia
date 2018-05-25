@@ -59,12 +59,12 @@ public class Alumno_CRUD extends javax.swing.JFrame {
                 
                 Object[] fila = new Object[cantCols];
                 
-                fila[0] = rs.getObject(1);
-                fila[1] = rs.getObject(3);
-                fila[2] = rs.getObject(4);
-                fila[3] = rs.getObject(5);
-                fila[4] = rs.getObject(6);
-                fila[5] = rs.getObject(7);
+                fila[0] = rs.getObject(2);
+                fila[1] = rs.getObject(4);
+                fila[2] = rs.getObject(5);
+                fila[3] = rs.getObject(6);
+                fila[4] = rs.getObject(7);
+                fila[5] = rs.getObject(8);
                 
                 modelo.addRow(fila);
             }
