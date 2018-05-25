@@ -177,6 +177,83 @@ public class Alumno extends Persona {
         
     }
     
-   
+    //Listar observaciones de un alumno.
+    public ResultSet listObservations(String alumnoDni) {
+        conn = MySql.getConnection();
+        
+        try {
+            ps = conn.prepareStatement("SELECT alumnos.nombreCompleto, observaciones_de_alumnos.contenido, observaciones_de_alumnos.created_at FROM observaciones_de_alumnos INNER JOIN alumnos WHERE alumnos.id = observaciones_de_alumnos.alumno_id AND alumnos.dni = ?");
+            ps.setString(1, alumnoDni);
+            rs = ps.executeQuery();
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: "+e.toString(), "¡Error!", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        return rs;
+    }
+    
+    //Guardar observación de un alumno.
+    public void saveObservation(int alumnoId, Observacion observacion) {
+        conn = MySql.getConnection();
+        
+        try {
+            ps = conn.prepareStatement("INSERT INTO observaciones_de_alumnos (alumno_id, contenido, created_at, updated_at) VALUES (?,?,?,?)");
+            
+            ps.setInt(1, alumnoId);
+            ps.setString(2, observacion.getObservacion());
+            ps.setTimestamp(3, Timestamp.valueOf(observacion.getCreated_at()));
+            ps.setTimestamp(4, Timestamp.valueOf(observacion.getUpdated_at()));
+            
+            int resultado = ps.executeUpdate();
+            
+            if(resultado == 1) {
+                JOptionPane.showMessageDialog(null, "¡Observación registrada con éxito!", "¡Éxito!", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error: "+e.toString(), "¡Error!", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
+    }
+    
+    //Actualizar la observacion de un alumno.
+    public void updateObservation(Observacion observacion) {
+        conn = MySql.getConnection();
+        
+        try {
+            ps = conn.prepareStatement("UPDATE observaciones_de_alumnos SET contenido=?, updated_at=? WHERE id=?");
+            ps.setString(1, observacion.getObservacion());
+            ps.setTimestamp(2, Timestamp.valueOf(observacion.getUpdated_at()));
+            ps.setInt(3, observacion.getId());
+            
+            int resultado = ps.executeUpdate();
+            
+            if(resultado == 1) {
+                JOptionPane.showMessageDialog(null, "¡Observación actualizada!", "¡Éxito!", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: "+e.toString(), "¡Error!", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
+    }
+    
+    //Elimina la observación de un alumno.
+    public void deleteObservation(int observacionId) {
+        conn = MySql.getConnection();
+        try {
+            ps = conn.prepareStatement("DELETE FROM observaciones_de_alumnos WHERE id=?");
+            ps.setInt(1, observacionId);
+            
+            int resultado = ps.executeUpdate();
+            if(resultado == 1) {
+                JOptionPane.showMessageDialog(null, "¡Observación eliminada!", "'Éxito!", JOptionPane.INFORMATION_MESSAGE);
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: "+e.toString(), "¡Error!", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 }
     
