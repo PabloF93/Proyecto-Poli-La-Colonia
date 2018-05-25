@@ -15,7 +15,7 @@ public abstract class Persona extends Entidad {
     protected String dni;
     protected String nombreCompleto;
     protected String sexo;
-    protected boolean deleted;
+    protected boolean deleted = false;
     //relaciones
     protected List<Contacto> contactosList = new ArrayList();
     protected List<Observacion> observacionList = new ArrayList();

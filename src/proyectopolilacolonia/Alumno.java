@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 import javax.swing.JOptionPane;
 import java.sql.Timestamp;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.time.Instant;
 import java.time.ZoneOffset;
 
@@ -57,41 +58,43 @@ public class Alumno extends Persona {
     //listar alumnos
     public ResultSet List() {
         
+        conn = MySql.getConnection();
+        
         try {
-            conn = MySql.getConnection();
-            ps = conn.prepareStatement("SELECT dni, nombreCompleto, edad, sexo, observaciones, created_at, updated_at FROM alumnos WHERE deleted=false");
+            
+            ps = conn.prepareStatement("SELECT dni,codTarjeta, nombreCompleto, fechaNacimiento, sexo, created_at, updated_at FROM alumnos WHERE deleted=false");
             rs = ps.executeQuery();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error: "+e.toString());
+            JOptionPane.showMessageDialog(null, "Error: "+e.toString(), "Error", JOptionPane.ERROR);
         }
         
         return rs;
     }
     
-    //Buscar alumno por id
-    public Alumno find(int id) {
+    //Buscar alumno por dni
+    public Alumno find(String dni) {
         Alumno alumno = new Alumno();
-        
+        conn = MySql.getConnection();
         try {
-            conn = MySql.getConnection();
-            ps = conn.prepareStatement("SELECT dni, nombreCompleto, edad, sexo, observaciones, created_at, updated_at FROM alumnos WHERE id=? AND deleted=false");
             
-            ps.setInt(1, id);
+            ps = conn.prepareStatement("SELECT dni, codTarjeta, nombreCompleto, fechaNacimiento, sexo, created_at, updated_at FROM alumnos WHERE dni=? AND deleted=false");
+            
+            ps.setString(1, dni);
             
             rs = ps.executeQuery();
             
             while(rs.next()) {
                 
                 alumno.setDni(rs.getString(1));
-                alumno.setNombreCompleto(rs.getString(2));
-                alumno.edad = rs.getInt(3);
-                alumno.sexo = rs.getString(4);
-                alumno.observaciones = rs.getString(5);
+                alumno.setCodTarjeta(rs.getString(2));
+                alumno.setNombreCompleto(rs.getString(3));
+                alumno.setFechaNacimiento(rs.getDate(4).toLocalDate());
+                alumno.setSexo(rs.getString(5));
                 alumno.created_at = LocalDateTime.ofInstant(rs.getTimestamp(6).toInstant(), ZoneOffset.ofHours(0));
                 alumno.created_at = LocalDateTime.ofInstant(rs.getTimestamp(7).toInstant(), ZoneOffset.ofHours(0));
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error: "+e.toString());
+            //JOptionPane.showMessageDialog(null, "Error: No se encuentra el alumno con ese DNI. "+e.toString(), "¡Error!", JOptionPane.ERROR);
         }
         
         return alumno;
@@ -100,65 +103,76 @@ public class Alumno extends Persona {
     //Guardar alumno
     public void save(Alumno alumno) {
         
+        conn = MySql.getConnection();
         try {
-            conn = MySql.getConnection();
-            ps = conn.prepareStatement("INSERT INTO alumnos(dni, nombreCompleto, edad, sexo, observaciones, created_at, updated_at, deleted) VALUES(?,?,?,?,?,?,?,?)");
-            
+            ps = conn.prepareStatement("INSERT INTO alumnos (dni,codTarjeta,nombreCompleto,fechaNacimiento,sexo,created_at,updated_at,deleted) VALUES (?,?,?,?,?,?,?,?)");
             ps.setString(1, alumno.getDni());
-            ps.setString(2, alumno.getNombreCompleto());
-            ps.setInt(3, alumno.edad);
-            ps.setString(4, alumno.sexo);
-            ps.setString(5, alumno.observaciones);
-            ps.setTimestamp(6, Timestamp.valueOf(alumno.created_at));
-            ps.setTimestamp(7, Timestamp.valueOf(alumno.updated_at));
-            ps.setBoolean(8, alumno.deleted);
+            ps.setString(2, alumno.getCodTarjeta());
+            ps.setString(3, alumno.getNombreCompleto());
+            ps.setDate(4, Date.valueOf(alumno.getFechaNacimiento()));
+            ps.setString(5, alumno.getSexo());
+            ps.setTimestamp(6, Timestamp.valueOf(alumno.getCreated_at()));
+            ps.setTimestamp(7, Timestamp.valueOf(alumno.getUpdated_at()));
+            ps.setBoolean(8, alumno.isDeleted());
             
-            ps.executeUpdate();
+            int resultado = ps.executeUpdate();
+           
+            if(resultado == 1) {
+                JOptionPane.showMessageDialog(null, "¡Usuario registrado!", "¡Éxito!", JOptionPane.INFORMATION_MESSAGE);
+            } 
             
-            JOptionPane.showMessageDialog(null, "¡Usuario registrado con éxito!");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error: "+e.toString());
+            JOptionPane.showMessageDialog(null, "Error: "+e.toString(), "¡Error!", JOptionPane.ERROR_MESSAGE);
         }
+        
+        
+        
+        
         
     }
     
     //Actualizar alumno
     public void update(Alumno alumno) {
-        
+        conn = MySql.getConnection();
         try {
-            conn = MySql.getConnection();
-            ps = conn.prepareStatement("UPDATE alumnos SET nombreCompleto=?, edad=?, sexo=?, observaciones=?, updated_at=? WHERE id=?");
+            
+            ps = conn.prepareStatement("UPDATE alumnos SET nombreCompleto=?, fechaNacimiento=?, sexo=?, updated_at=? WHERE dni=?");
             
             ps.setString(1, alumno.getNombreCompleto());
-            ps.setInt(2, alumno.edad);
-            ps.setString(3, alumno.sexo);
-            ps.setString(4, alumno.observaciones);
-            ps.setTimestamp(5, Timestamp.valueOf(alumno.updated_at));
-            ps.setInt(6, alumno.id);
+            ps.setDate(2, Date.valueOf(alumno.getFechaNacimiento()));
+            ps.setString(3, alumno.getSexo());
+            ps.setTimestamp(4, Timestamp.valueOf(alumno.updated_at));
+            ps.setString(5, alumno.getDni());
             
-            ps.executeUpdate();
+            int resultado = ps.executeUpdate();
             
-            JOptionPane.showMessageDialog(null, "¡Usuario actualizado con éxito!");
+            if(resultado == 1) {
+                JOptionPane.showMessageDialog(null, "¡Usuario actualizado con éxito!");
+            }
+            
+            
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error: "+e.toString());
+            //JOptionPane.showMessageDialog(null, "Error: No se pudo actualizar el alumno. Compruebe el DNI ingresado."+e.toString(), "¡Error!", JOptionPane.ERROR);
         }
         
     }
     
     //Soft-delete de alumno mediante update deleted=true
-    public void delete(int id) {
-        
+    public void delete(String dni) {
+        conn = MySql.getConnection();
         try {
-            conn = MySql.getConnection();
-            ps = conn.prepareStatement("UPDATE alumnos SET deleted=true WHERE id=?");
-            ps.setInt(1, id);
             
-            ps.executeUpdate();
+            ps = conn.prepareStatement("UPDATE alumnos SET deleted=true WHERE dni=?");
+            ps.setString(1, dni);
             
-            JOptionPane.showMessageDialog(null, "¡Alumno eliminado con éxito!");
+            int resultado = ps.executeUpdate();
+            
+            if(resultado == 1) {
+               JOptionPane.showMessageDialog(null, "¡Alumno eliminado con éxito!"); 
+            }
             
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error: "+e.toString());
+            //JOptionPane.showMessageDialog(null, "Error: No se puedo eliminar el alumno. Compruebe el DNI ingresado."+e.toString(), "¡Error!", JOptionPane.ERROR);
         }
         
     }

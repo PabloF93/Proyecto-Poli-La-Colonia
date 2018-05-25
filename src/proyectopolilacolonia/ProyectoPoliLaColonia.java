@@ -5,6 +5,7 @@
  */
 package proyectopolilacolonia;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
@@ -33,7 +34,16 @@ public class ProyectoPoliLaColonia {
 //        alumno.setUpdated_at(LocalDateTime.now());
 //        
 //        alumno.save(alumno);
-        
+//            Alumno a = new Alumno();
+//            a.setDni("37963374");
+//            a.setCodTarjeta("37963374PabloFarina");
+//            a.setNombreCompleto("Pablo Farina");
+//            a.setFechaNacimiento(LocalDate.now());
+//            a.setSexo("Masculino");
+//            a.setCreated_at(LocalDateTime.now());
+//            a.setUpdated_at(LocalDateTime.now());
+//            a.setDeleted(false);
+//            a.save(a);
         
         
     }
