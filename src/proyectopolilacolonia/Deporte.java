@@ -5,6 +5,9 @@
  */
 package proyectopolilacolonia;
 
+import java.util.List;
+import java.util.ArrayList;
+
 /**
  *
  * @author Moron
@@ -12,7 +15,19 @@ package proyectopolilacolonia;
 public class Deporte extends Entidad{
 
     private String nombreDeporte;
-    private ValorCuota cuota;
+    private List<Categoria> categoriaList = new ArrayList();
+
+    public List<Categoria> getA() {
+        return categoriaList;
+    }
+
+    public void setA(List<Categoria> categoriasList) {
+        this.categoriaList = categoriaList;
+    }
+    
+    public void agregarCategoria(Categoria cat){
+    this.categoriaList.add(cat);
+    }
     
     public String getNombreDeporte() {
         return nombreDeporte;
@@ -20,15 +35,5 @@ public class Deporte extends Entidad{
 
     public void setNombreDeporte(String nombreDeporte) {
         this.nombreDeporte = nombreDeporte;
-    }
-
-    public ValorCuota getCuota() {
-        return cuota;
-    }
-
-    public void setCuota(ValorCuota cuota) {
-        this.cuota = cuota;
-    }
-    
-    
+    }       
 }

@@ -12,18 +12,9 @@ import java.util.Date;
  * @author Moron
  */
 public class Clase extends Entidad{
-    private String categoria;
     private Date diaHora; 
-    private Deporte deporte;
     private Profesor entrenador;
 
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
 
     public Date getDiaHora() {
         return diaHora;
@@ -31,14 +22,6 @@ public class Clase extends Entidad{
 
     public void setDiaHora(Date diaHora) {
         this.diaHora = diaHora;
-    }
-
-    public Deporte getDeporte() {
-        return deporte;
-    }
-
-    public void setDeporte(Deporte deporte) {
-        this.deporte = deporte;
     }
 
     public Profesor getEntrenador() {

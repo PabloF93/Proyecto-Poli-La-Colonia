@@ -15,9 +15,26 @@ import java.time.LocalDate;
 public class Inscripcion extends Entidad {
     private LocalDate fechaInscripcion; //dia mes año minutos y segundos de la inscripcion
     private int numeroComprobante;
-    private Clase inscripto;
     private Alumno alumno;
+    private Deporte deporte;
+    private Categoria categoria;
 
+    public Deporte getDeporte() {
+        return deporte;
+    }
+
+    public void setDeporte(Deporte deporte) {
+        this.deporte = deporte;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+        
     public LocalDate getFechaInscripcion() {
         return fechaInscripcion;
     }
@@ -44,13 +61,6 @@ public class Inscripcion extends Entidad {
     public void setAlumno(Alumno alumno) {
         this.alumno = alumno;
     }
-
-    public Clase getInscripto() {
-        return inscripto;
-    }
-
-    public void setInscripto(Clase inscripto) {
-        this.inscripto = inscripto;
-    }    
+ 
     
 }

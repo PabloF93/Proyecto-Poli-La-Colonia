@@ -5,7 +5,7 @@
  */
 package proyectopolilacolonia;
 
-import com.mysql.jdbc.SQLError;
+//import com.mysql.jdbc.SQLError;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
