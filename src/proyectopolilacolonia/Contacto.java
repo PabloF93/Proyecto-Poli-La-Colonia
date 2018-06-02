@@ -2,7 +2,7 @@ package proyectopolilacolonia;
 
 public class Contacto extends Entidad{
     private String nombreContacto;
-    private int telefono;
+    private String telefono;
     private String vinculo; // Este atributo indica la relacion con la persona. (Padre, madre, amigo, tutor, etc.)
 
     public String getNombreContacto() {
@@ -13,11 +13,11 @@ public class Contacto extends Entidad{
         this.nombreContacto = nombreContacto;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int Telefono) {
+    public void setTelefono(String Telefono) {
         this.telefono = Telefono;
     }
 

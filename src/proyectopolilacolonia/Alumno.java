@@ -257,6 +257,89 @@ public class Alumno extends Persona {
         }
     }
     
+    //Muestra todos los contactos de un alumno.
+    public ResultSet listContacts(String alumnoDni) {
+        conn = MySql.getConnection();
+        
+        try {
+            ps = conn.prepareStatement("SELECT contactos_de_alumnos.id, alumnos.nombreCompleto, contactos_de_alumnos.nombre, contactos_de_alumnos.telefono, contactos_de_alumnos.vinculo FROM contactos_de_alumnos INNER JOIN alumnos ON alumnos.id = contactos_de_alumnos.alumno_id WHERE alumnos.dni = ?");
+            ps.setString(1, alumnoDni);
+            
+            rs = ps.executeQuery();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: "+e.toString(), "¡Error!", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        return rs;
+    }
     
+    //Guarda un contacto del alumno dado.
+    public void saveContact(int alumnoId, Contacto contacto) {
+        
+        conn = MySql.getConnection();
+        
+        try {
+            
+            ps = conn.prepareStatement("INSERT INTO contactos_de_alumnos(alumno_id, nombre, telefono, vinculo) VALUES(?,?,?,?)");
+            ps.setInt(1, alumnoId);
+            ps.setString(2, contacto.getNombreContacto());
+            ps.setString(3, contacto.getTelefono());
+            ps.setString(4, contacto.getVinculo());
+            
+            int resultado = ps.executeUpdate();
+            
+            if(resultado == 1) {
+                JOptionPane.showMessageDialog(null, "¡Contacto de alumno guardado con éxito!");
+            }
+            
+        } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error: "+e.toString(), "¡Error!", JOptionPane.ERROR_MESSAGE);
+        }
+            
+        
+    }
+    
+    //Actualiza el contacto de un alumno dado.
+    public void updateContact(Contacto contacto) {
+        
+        conn = MySql.getConnection();
+        
+        try {
+            ps = conn.prepareStatement("UPDATE contactos_de_alumnos SET nombre=?, telefono=?, vinculo=? WHERE id = ?");
+            ps.setString(1, contacto.getNombreContacto());
+            ps.setString(2, contacto.getTelefono());
+            ps.setString(3, contacto.getVinculo());
+            ps.setInt(4, contacto.getId());
+            
+            int resultado = ps.executeUpdate();
+            
+            if(resultado == 1) {
+                JOptionPane.showMessageDialog(null, "¡COntacto de alumno actualizado con éxito!");
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: "+e.toString(), "¡Error!", JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }
+    
+    //Borra el contacto de un alumno dado.
+    public void deleteContact(int contactoId) {
+        conn = MySql.getConnection();
+        
+        try {
+            ps = conn.prepareStatement("DELETE FROM contactos_de_alumnos WHERE id = ?");
+            ps.setInt(1, contactoId);
+            
+            int resultado = ps.executeUpdate();
+            
+            if(resultado == 1) {
+                JOptionPane.showMessageDialog(null, "¡Contacto de alumno borrado con éxito!");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: "+e.toString(), "¡Error!", JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }
 }
     
