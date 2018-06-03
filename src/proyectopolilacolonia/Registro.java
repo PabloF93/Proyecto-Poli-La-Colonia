@@ -6,6 +6,7 @@
 package proyectopolilacolonia;
 
 //import java.util.Calendar;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -13,14 +14,14 @@ import java.util.Date;
  * @author Moron
  */
 public class Registro extends Entidad {
-    private Date fechaHora;
+    private LocalDateTime fechaHora;
     private Persona persona;
             
-    public Date getFechaHora() {
+    public LocalDateTime getFechaHora() {
         return fechaHora;
     }
 
-    public void setFechaHora(Date fechaHora) {
+    public void setFechaHora(LocalDateTime fechaHora) {
         this.fechaHora = fechaHora;
     }
 
@@ -33,7 +34,7 @@ public class Registro extends Entidad {
     }
 
     
-    public Registro(Date fechaHora, Persona persona) {
+    public Registro(LocalDateTime fechaHora, Persona persona) {
         this.fechaHora = fechaHora;
         this.persona = persona;
     }

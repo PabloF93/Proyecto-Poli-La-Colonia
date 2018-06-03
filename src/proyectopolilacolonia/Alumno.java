@@ -341,5 +341,21 @@ public class Alumno extends Persona {
         }
         
     }
+    
+    public void saveTimestamp(Registro registro) {
+        conn = MySql.getConnection();
+        try {
+            ps = conn.prepareStatement("INSERT INTO registros_de_alumnos(alumno_id, created_at) VALUES(?,?");
+            ps.setInt(1, registro.getPersona().getId());
+            ps.setTimestamp(2, Timestamp.valueOf(registro.getFechaHora()));
+            
+            int resultado = ps.executeUpdate();
+            
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: "+e.toString(), "¡Error!", JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }
 }
     
