@@ -21,7 +21,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="JMenuItem_Alumnos_CRUD">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Registrar, actualizar, eliminar"/>
+                <Property name="text" type="java.lang.String" value="Registrar, actualizar, eliminar..."/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JMenuItem_Alumnos_CRUDActionPerformed"/>
@@ -33,6 +33,14 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JMenuItem_Alumno_ObservacionesActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="JMenuItem_Alumno_Contactos">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Contactos..."/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JMenuItem_Alumno_ContactosActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>

@@ -33,6 +33,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         JMenuItem_Alumnos_CRUD = new javax.swing.JMenuItem();
         JMenuItem_Alumno_Observaciones = new javax.swing.JMenuItem();
+        JMenuItem_Alumno_Contactos = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -44,7 +45,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
         jMenu3.setText("Alumnos...");
 
-        JMenuItem_Alumnos_CRUD.setText("Registrar, actualizar, eliminar");
+        JMenuItem_Alumnos_CRUD.setText("Registrar, actualizar, eliminar...");
         JMenuItem_Alumnos_CRUD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JMenuItem_Alumnos_CRUDActionPerformed(evt);
@@ -59,6 +60,14 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu3.add(JMenuItem_Alumno_Observaciones);
+
+        JMenuItem_Alumno_Contactos.setText("Contactos...");
+        JMenuItem_Alumno_Contactos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMenuItem_Alumno_ContactosActionPerformed(evt);
+            }
+        });
+        jMenu3.add(JMenuItem_Alumno_Contactos);
 
         jMenuBar1.add(jMenu3);
 
@@ -89,6 +98,12 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         ao1.setLocationRelativeTo(null);
         ao1.setVisible(true);
     }//GEN-LAST:event_JMenuItem_Alumno_ObservacionesActionPerformed
+
+    private void JMenuItem_Alumno_ContactosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuItem_Alumno_ContactosActionPerformed
+        Alumno_Contactos ac1 = new Alumno_Contactos();
+        ac1.setLocationRelativeTo(null);
+        ac1.setVisible(true);
+    }//GEN-LAST:event_JMenuItem_Alumno_ContactosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -126,6 +141,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem JMenuItem_Alumno_Contactos;
     private javax.swing.JMenuItem JMenuItem_Alumno_Observaciones;
     private javax.swing.JMenuItem JMenuItem_Alumnos_CRUD;
     private javax.swing.JMenu jMenu1;
