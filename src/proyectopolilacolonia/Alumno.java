@@ -14,7 +14,6 @@ import javax.swing.JOptionPane;
 import java.sql.Timestamp;
 import java.sql.Date;
 import java.sql.SQLException;
-import java.time.Instant;
 import java.time.ZoneOffset;
 
 /**
@@ -91,8 +90,8 @@ public class Alumno extends Persona {
                 alumno.setNombreCompleto(rs.getString(4));
                 alumno.setFechaNacimiento(rs.getDate(5).toLocalDate());
                 alumno.setSexo(rs.getString(6));
-                alumno.created_at = LocalDateTime.ofInstant(rs.getTimestamp(7).toInstant(), ZoneOffset.ofHours(0));
-                alumno.created_at = LocalDateTime.ofInstant(rs.getTimestamp(8).toInstant(), ZoneOffset.ofHours(0));
+                alumno.setCreated_at(LocalDateTime.ofInstant(rs.getTimestamp(7).toInstant(), ZoneOffset.ofHours(0)));
+                alumno.setUpdated_at(LocalDateTime.ofInstant(rs.getTimestamp(8).toInstant(), ZoneOffset.ofHours(0)));
             }
         } catch (Exception e) {
             //JOptionPane.showMessageDialog(null, "Error: No se encuentra el alumno con ese DNI. "+e.toString(), "¡Error!", JOptionPane.ERROR);
@@ -342,6 +341,7 @@ public class Alumno extends Persona {
         
     }
     
+    //Registrar el horario de un alumno.
     public void saveTimestamp(Registro registro) {
         conn = MySql.getConnection();
         try {
