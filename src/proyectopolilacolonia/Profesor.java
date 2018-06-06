@@ -51,7 +51,7 @@ public class Profesor extends Persona{
     public ResultSet list() {
         conn = MySql.getConnection();
         try {
-            ps = conn.prepareStatement("SELECT * FROM profesores WHERE deleted = false");
+            ps = conn.prepareStatement("SELECT * FROM profesores WHERE deleted = false ORDER BY nombreCompleto");
             rs = ps.executeQuery();
             
         } catch (Exception e) {
@@ -67,7 +67,7 @@ public class Profesor extends Persona{
         conn = MySql.getConnection();
         
         try {
-            ps = conn.prepareStatement("SELECT * FROM profesores WHERE dni = ? AND deleted = false");
+            ps = conn.prepareStatement("SELECT * FROM profesores WHERE dni=? AND deleted=false");
             ps.setString(1, dni);
             
             rs = ps.executeQuery();
@@ -97,7 +97,7 @@ public class Profesor extends Persona{
     public void save(Profesor p) {
         conn = MySql.getConnection();
         try {
-            ps = conn.prepareStatement("INSERT INTO profesores(dni,codTarjeta,nombreCompleto,fechaNacimiento,sexo,created_at,updated_at,deleted) VALUES(?,?,?,?,?,?,?,?))");
+            ps = conn.prepareStatement("INSERT INTO profesores(dni, codTarjeta, nombreCompleto, fechaNacimiento, sexo, created_at, updated_at, deleted) VALUES(?,?,?,?,?,?,?,?)");
             ps.setString(1, p.getDni());
             ps.setString(2, p.getCodTarjeta());
             ps.setString(3, p.getNombreCompleto());

@@ -7,98 +7,65 @@ package Interfaces;
 
 import java.sql.Date;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.PlainDocument;
-import proyectopolilacolonia.Alumno;
+import proyectopolilacolonia.Profesor;
 
 /**
  *
  * @author Pablo2
  */
-public class Alumno_CRUD extends javax.swing.JFrame {
+public class Profesor_CRUD extends javax.swing.JFrame {
 
     private ResultSet rs = null;
-    private ResultSetMetaData rsmd = null;
     
-    public Alumno_CRUD() {
+    public Profesor_CRUD() {
         initComponents();
-        
         this.BtnGroup_sexo.add(RButton_masculino);
         this.BtnGroup_sexo.add(RButton_femenino);
         this.BtnGroup_sexo.add(RButton_otro);
-        this.RButton_masculino.setSelected(true);
         
-        this.limpiar();
-        this.RefrescarTabla();
+        this.RButton_masculino.setSelected(true);
+        this.refrescarProfesores();
         
     }
     
-    private void RefrescarTabla() {
-        
-        Alumno alumno = new Alumno();
-        rs = alumno.List();
-
-        DefaultTableModel modelo = (DefaultTableModel) JTable_alumnos.getModel();
+    private void refrescarProfesores() {
+        Profesor p = new Profesor();
+        rs = p.list();
+        DefaultTableModel modelo = (DefaultTableModel) this.JTable_profesores.getModel();
         modelo.setRowCount(0);
+        int cantCols = modelo.getColumnCount();
         
-        
-        int cantCols = 6;
         try {
-            
             while(rs.next()) {
-                
                 Object[] fila = new Object[cantCols];
-                
+            
                 fila[0] = rs.getObject(2);
                 fila[1] = rs.getObject(4);
                 fila[2] = rs.getObject(5);
                 fila[3] = rs.getObject(6);
                 fila[4] = rs.getObject(7);
                 fila[5] = rs.getObject(8);
-                
+
                 modelo.addRow(fila);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(Alumno_CRUD.class.getName()).log(Level.SEVERE, null, ex);
+            
+            
+        } catch (Exception e) {
         }
-        
     }
     
     private void limpiar() {
-        
         this.TxtField_dni.setText("");
         this.TxtField_nombre.setText("");
+        this.JDPicker_fechaNacimiento.setDate(null);
         this.RButton_masculino.setSelected(true);
-        this.Dpicker_fecha.setDate(null);
-        this.TxtField_nombre.requestFocus();
+        this.TxtField_buscarDni.setText("");
         
-        
-    }
-    
-    private void validarCampos(String dni, String nombre) {
-//        String regexDni = "^[1-9]";
-//        String regexNombre = "^[aA-zZ]+\\s*";
-//        
-//        if(!regexDni.matches(dni)) {
-//            JOptionPane.showMessageDialog(this, "¡El campo DNI solo puede tener números!", "¡Error!", JOptionPane.ERROR_MESSAGE);
-//        }
-//        
-//        if(!regexNombre.matches(nombre)) {
-//            JOptionPane.showMessageDialog(this, "¡El campo nombre solo puede tener letras!", "¡Error!", JOptionPane.ERROR_MESSAGE);
-//        }
-        
-        
-        
+        this.TxtField_nombre.setRequestFocusEnabled(true);
     }
 
     /**
@@ -120,15 +87,15 @@ public class Alumno_CRUD extends javax.swing.JFrame {
         RButton_masculino = new javax.swing.JRadioButton();
         RButton_femenino = new javax.swing.JRadioButton();
         RButton_otro = new javax.swing.JRadioButton();
-        Dpicker_fecha = new org.jdesktop.swingx.JXDatePicker();
+        JDPicker_fechaNacimiento = new org.jdesktop.swingx.JXDatePicker();
         Btn_registrar = new javax.swing.JButton();
         Btn_editar = new javax.swing.JButton();
         Btn_eliminar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        JTable_alumnos = new javax.swing.JTable();
+        JTable_profesores = new javax.swing.JTable();
         Btn_cerrar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        TxtField_buscarPorDni = new javax.swing.JTextField();
+        TxtField_buscarDni = new javax.swing.JTextField();
         Btn_buscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -148,7 +115,6 @@ public class Alumno_CRUD extends javax.swing.JFrame {
         RButton_otro.setText("Otro");
 
         Btn_registrar.setText("Registrar");
-        Btn_registrar.setToolTipText("Registrar un nuevo alumno");
         Btn_registrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Btn_registrarActionPerformed(evt);
@@ -156,7 +122,6 @@ public class Alumno_CRUD extends javax.swing.JFrame {
         });
 
         Btn_editar.setText("Editar");
-        Btn_editar.setToolTipText("Editar un alumno existente");
         Btn_editar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Btn_editarActionPerformed(evt);
@@ -164,14 +129,13 @@ public class Alumno_CRUD extends javax.swing.JFrame {
         });
 
         Btn_eliminar.setText("Eliminar");
-        Btn_eliminar.setToolTipText("Borrar un alumno existente");
         Btn_eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Btn_eliminarActionPerformed(evt);
             }
         });
 
-        JTable_alumnos.setModel(new javax.swing.table.DefaultTableModel(
+        JTable_profesores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -179,28 +143,21 @@ public class Alumno_CRUD extends javax.swing.JFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Dni", "Nombre y apellido", "Fecha de nacimiento", "Sexo", "Fecha de registro", "Ultima vez modificado"
+                "DNI", "Nombre y apellido", "Fecha de nacimiento", "Sexo", "Registrado el día...", "Editado por última vez..."
             }
         ));
-        JTable_alumnos.addMouseListener(new java.awt.event.MouseAdapter() {
+        JTable_profesores.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                JTable_alumnosMouseClicked(evt);
+                JTable_profesoresMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(JTable_alumnos);
+        jScrollPane1.setViewportView(JTable_profesores);
 
         Btn_cerrar.setText("Cerrar");
-        Btn_cerrar.setToolTipText("Cerrar formulario");
-        Btn_cerrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Btn_cerrarActionPerformed(evt);
-            }
-        });
 
-        jLabel5.setText("Buscar alumnos por DNI:");
+        jLabel5.setText("Buscar por DNI en el listado:");
 
         Btn_buscar.setText("Buscar");
-        Btn_buscar.setToolTipText("Buscar un alumno en el listado por el DNI.");
         Btn_buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Btn_buscarActionPerformed(evt);
@@ -214,7 +171,8 @@ public class Alumno_CRUD extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(Btn_cerrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -231,22 +189,26 @@ public class Alumno_CRUD extends javax.swing.JFrame {
                                 .addComponent(RButton_femenino)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(RButton_otro)
-                                .addGap(0, 85, Short.MAX_VALUE))
-                            .addComponent(Dpicker_fecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(Btn_cerrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(JDPicker_fechaNacimiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(Btn_registrar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Btn_editar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Btn_eliminar)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(TxtField_buscarPorDni, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Btn_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(25, 25, 25))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(Btn_registrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(10, 10, 10)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(TxtField_buscarDni, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Btn_buscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(Btn_editar, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(Btn_eliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -269,21 +231,21 @@ public class Alumno_CRUD extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(Dpicker_fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(JDPicker_fechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Btn_registrar)
                     .addComponent(Btn_editar)
                     .addComponent(Btn_eliminar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(TxtField_buscarPorDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TxtField_buscarDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Btn_buscar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Btn_cerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Btn_cerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -291,118 +253,114 @@ public class Alumno_CRUD extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Btn_registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_registrarActionPerformed
-        if(this.TxtField_nombre.getText() == "" || this.TxtField_dni.getText() == "" || this.Dpicker_fecha.getDate() == null) {
-            JOptionPane.showMessageDialog(this, "¡Todos los campos son obligatorios!", "¡Error!", JOptionPane.ERROR_MESSAGE);
+        
+        if(this.TxtField_nombre.getText() == "" || this.TxtField_dni.getText() == "" || this.JDPicker_fechaNacimiento.getDate()==null) {
+            JOptionPane.showMessageDialog(this, "¡Los campos no pueden estar vacios!", "¡Error!", JOptionPane.ERROR_MESSAGE);
         } else {
-//            this.validarCampos(TxtField_dni.getText().trim(), TxtField_nombre.getText().trim());
             
-            
-            Alumno alumno = new Alumno();
-            String codTarjeta = this.TxtField_dni.getText().trim() + this.TxtField_nombre.getText().trim();
-            LocalDate fechaNacimiento = this.Dpicker_fecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            //LocalDate fechaNacimiento = LocalDate.now();
-            alumno.setDni(this.TxtField_dni.getText().trim());
-            alumno.setCodTarjeta(codTarjeta);
-            alumno.setNombreCompleto(this.TxtField_nombre.getText().trim());
-            alumno.setFechaNacimiento(fechaNacimiento);
+            Profesor p = new Profesor();
+            p.setNombreCompleto(this.TxtField_nombre.getText().trim());
+            p.setDni(this.TxtField_dni.getText().trim());
+            String codTarjeta = this.TxtField_nombre.getText().trim()+this.TxtField_dni.getText().trim();
+            p.setCodTarjeta(codTarjeta);
             
             if(this.RButton_masculino.isSelected()) {
-                alumno.setSexo(this.RButton_masculino.getText());
-            } else if (this.RButton_femenino.isSelected()) {
-                alumno.setSexo(this.RButton_femenino.getText());
+                p.setSexo(this.RButton_masculino.getText());
+            } else if(this.RButton_femenino.isSelected()) {
+                p.setSexo(this.RButton_femenino.getText());
             } else {
-                alumno.setSexo(this.RButton_otro.getText());
+                p.setSexo(this.RButton_otro.getText());
             }
+            p.setFechaNacimiento(this.JDPicker_fechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+            p.setCreated_at(LocalDateTime.now());
+            p.setUpdated_at(LocalDateTime.now());
             
-            alumno.setCreated_at(LocalDateTime.now());
-            alumno.setUpdated_at(LocalDateTime.now());
-           
             
-            alumno.save(alumno);
+            p.save(p);
             
-            this.RefrescarTabla();
-            
+            this.refrescarProfesores();
+            this.limpiar();
         }
+       
+        
     }//GEN-LAST:event_Btn_registrarActionPerformed
 
-    private void JTable_alumnosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTable_alumnosMouseClicked
-        int fila = this.JTable_alumnos.getSelectedRow();
-        String dni = this.JTable_alumnos.getValueAt(fila, 0).toString();
-        Alumno a1 = new Alumno();
-        Alumno a2 = new Alumno();
-        
-        a2 = a1.find(dni);
-        this.TxtField_dni.setText(a2.getDni());
-        this.TxtField_nombre.setText(a2.getNombreCompleto());
-        
-        if(a2.getSexo().equalsIgnoreCase("Masculino")) {
+    private void Btn_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_editarActionPerformed
+        if(this.TxtField_nombre.getText() == "" || this.TxtField_dni.getText() == "" || this.JDPicker_fechaNacimiento.getDate()==null) {
             
+        } else {
+            Profesor p = new Profesor();
+            int fila = this.JTable_profesores.getSelectedRow();
+            
+            p.setDni(this.JTable_profesores.getValueAt(fila, 0).toString());
+            p.setNombreCompleto(this.TxtField_nombre.getText().trim());
+          
+            if(this.RButton_masculino.isSelected()) {
+                p.setSexo(this.RButton_masculino.getText());
+            } else if(this.RButton_femenino.isSelected()) {
+                p.setSexo(this.RButton_femenino.getText());
+            } else {
+                p.setSexo(this.RButton_otro.getText());
+            }
+            
+            p.setFechaNacimiento(this.JDPicker_fechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+            p.setUpdated_at(LocalDateTime.now());
+            p.update(p);
+            
+            this.refrescarProfesores();
+            this.limpiar();
+        }
+    }//GEN-LAST:event_Btn_editarActionPerformed
+
+    private void Btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_eliminarActionPerformed
+        int resultado = JOptionPane.showConfirmDialog(this, "¿Estas seguro de que quieres eliminar este profesor?", "Eliminar", JOptionPane.YES_NO_OPTION);
+        if(resultado == JOptionPane.YES_NO_OPTION) {
+            int fila = this.JTable_profesores.getSelectedRow();
+            String dni = this.JTable_profesores.getValueAt(fila, 0).toString();
+            Profesor p = new Profesor();
+            p = p.find(dni);
+            p.delete(p.getId()); 
+            
+            this.refrescarProfesores();
+            this.limpiar();
+        }
+        
+        
+    }//GEN-LAST:event_Btn_eliminarActionPerformed
+
+    private void JTable_profesoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTable_profesoresMouseClicked
+        int fila = this.JTable_profesores.getSelectedRow();
+        String dni = this.JTable_profesores.getValueAt(fila, 0).toString();
+        String nombre = this.JTable_profesores.getValueAt(fila, 1).toString();
+        Date fechaNacimiento = Date.valueOf(this.JTable_profesores.getValueAt(fila, 2).toString());
+        String sexo = this.JTable_profesores.getValueAt(fila, 3).toString();
+        
+        this.TxtField_dni.setText(dni);
+        this.TxtField_nombre.setText(nombre);
+        this.JDPicker_fechaNacimiento.setDate(fechaNacimiento);
+        
+        if(sexo.equalsIgnoreCase("masculino")) {
             this.RButton_masculino.setSelected(true);
-        } else if(a2.getSexo().equalsIgnoreCase("Femenino")) {
-            
+        } else if(sexo.equalsIgnoreCase("femenino")) {
             this.RButton_femenino.setSelected(true);
         } else {
             this.RButton_otro.setSelected(true);
         }
         
-        this.Dpicker_fecha.setDate(Date.valueOf(a2.getFechaNacimiento()));
-        
-    }//GEN-LAST:event_JTable_alumnosMouseClicked
-
-    private void Btn_cerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_cerrarActionPerformed
-        this.limpiar();
-        this.dispose();
-        this.setVisible(false);
-        
-    }//GEN-LAST:event_Btn_cerrarActionPerformed
-
-    private void Btn_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_editarActionPerformed
-        Alumno a1 = new Alumno();
-        a1.setNombreCompleto(this.TxtField_nombre.getText().trim());
-        a1.setDni(this.TxtField_dni.getText().trim());
-        a1.setFechaNacimiento(this.Dpicker_fecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-        
-        if(this.RButton_masculino.isSelected()) {
-            a1.setSexo(this.RButton_masculino.getText());
-        } else if (this.RButton_femenino.isSelected()) {
-            a1.setSexo(this.RButton_femenino.getText());
-        } else {
-            a1.setSexo(this.RButton_otro.getText());
-        }
-        
-        a1.setUpdated_at(LocalDateTime.now());
-        
-        a1.update(a1);
-        
-        this.RefrescarTabla();
-        this.limpiar();
-    }//GEN-LAST:event_Btn_editarActionPerformed
-
-    private void Btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_eliminarActionPerformed
-        int result = JOptionPane.showConfirmDialog(this, "¿Estas seguro que quieres eliminar este usuario?");
-        if(result == JOptionPane.YES_NO_OPTION) {
-            String dni = this.TxtField_dni.getText().trim();
-            Alumno a1 = new Alumno();
-            a1.delete(dni);
-            this.RefrescarTabla();
-            this.limpiar();
-        }
-    }//GEN-LAST:event_Btn_eliminarActionPerformed
+    }//GEN-LAST:event_JTable_profesoresMouseClicked
 
     private void Btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_buscarActionPerformed
-        String dni = this.TxtField_buscarPorDni.getText().trim();
-        int cantRows = this.JTable_alumnos.getModel().getRowCount();
-        int cantCols = this.JTable_alumnos.getModel().getColumnCount();
+        DefaultTableModel modelo = (DefaultTableModel) this.JTable_profesores.getModel();
         
-        for(int i=0; i < cantRows; i++) {
-            for(int j=0; j < cantCols; j++) {
-                if(this.JTable_alumnos.getValueAt(i, j).toString().equalsIgnoreCase(dni)) {
-                    this.JTable_alumnos.setRowSelectionInterval(i, i);
-                    
+        for (int i = 0; i < modelo.getRowCount(); i++) {
+            for (int j = 0; j < modelo.getColumnCount(); j++) {
+                if(JTable_profesores.getValueAt(i, 0).toString().equalsIgnoreCase(this.TxtField_buscarDni.getText().trim())) {
+                    JTable_profesores.setRowSelectionInterval(i, i);
                 }
-                
             }
         }
+        
+        this.limpiar();
     }//GEN-LAST:event_Btn_buscarActionPerformed
 
     /**
@@ -422,20 +380,20 @@ public class Alumno_CRUD extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Alumno_CRUD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Profesor_CRUD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Alumno_CRUD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Profesor_CRUD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Alumno_CRUD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Profesor_CRUD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Alumno_CRUD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Profesor_CRUD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Alumno_CRUD().setVisible(true);
+                new Profesor_CRUD().setVisible(true);
             }
         });
     }
@@ -447,12 +405,12 @@ public class Alumno_CRUD extends javax.swing.JFrame {
     private javax.swing.JButton Btn_editar;
     private javax.swing.JButton Btn_eliminar;
     private javax.swing.JButton Btn_registrar;
-    private org.jdesktop.swingx.JXDatePicker Dpicker_fecha;
-    private javax.swing.JTable JTable_alumnos;
+    private org.jdesktop.swingx.JXDatePicker JDPicker_fechaNacimiento;
+    private javax.swing.JTable JTable_profesores;
     private javax.swing.JRadioButton RButton_femenino;
     private javax.swing.JRadioButton RButton_masculino;
     private javax.swing.JRadioButton RButton_otro;
-    private javax.swing.JTextField TxtField_buscarPorDni;
+    private javax.swing.JTextField TxtField_buscarDni;
     private javax.swing.JTextField TxtField_dni;
     private javax.swing.JTextField TxtField_nombre;
     private javax.swing.JLabel jLabel1;
