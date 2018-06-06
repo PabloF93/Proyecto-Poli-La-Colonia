@@ -34,6 +34,10 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         JMenuItem_Alumnos_CRUD = new javax.swing.JMenuItem();
         JMenuItem_Alumno_Observaciones = new javax.swing.JMenuItem();
         JMenuItem_Alumno_Contactos = new javax.swing.JMenuItem();
+        JMenuItem_Profesores_CRUD = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        JMenuItem_Deportes_CRUD = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -71,6 +75,30 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
+        JMenuItem_Profesores_CRUD.setText("Profesores...");
+
+        jMenuItem1.setText("Registrar, editar, eliminar...");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        JMenuItem_Profesores_CRUD.add(jMenuItem1);
+
+        jMenuBar1.add(JMenuItem_Profesores_CRUD);
+
+        jMenu4.setText("Deportes y categorías...");
+
+        JMenuItem_Deportes_CRUD.setText("Registrar, eliminar deportes...");
+        JMenuItem_Deportes_CRUD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMenuItem_Deportes_CRUDActionPerformed(evt);
+            }
+        });
+        jMenu4.add(JMenuItem_Deportes_CRUD);
+
+        jMenuBar1.add(jMenu4);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -104,6 +132,18 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         ac1.setLocationRelativeTo(null);
         ac1.setVisible(true);
     }//GEN-LAST:event_JMenuItem_Alumno_ContactosActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        Profesor_CRUD pc1 = new Profesor_CRUD();
+        pc1.setLocationRelativeTo(null);
+        pc1.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void JMenuItem_Deportes_CRUDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuItem_Deportes_CRUDActionPerformed
+        Deporte_CRUD dc1 = new Deporte_CRUD();
+        dc1.setLocationRelativeTo(null);
+        dc1.setVisible(true);
+    }//GEN-LAST:event_JMenuItem_Deportes_CRUDActionPerformed
 
     /**
      * @param args the command line arguments
@@ -144,9 +184,13 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem JMenuItem_Alumno_Contactos;
     private javax.swing.JMenuItem JMenuItem_Alumno_Observaciones;
     private javax.swing.JMenuItem JMenuItem_Alumnos_CRUD;
+    private javax.swing.JMenuItem JMenuItem_Deportes_CRUD;
+    private javax.swing.JMenu JMenuItem_Profesores_CRUD;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     // End of variables declaration//GEN-END:variables
 }

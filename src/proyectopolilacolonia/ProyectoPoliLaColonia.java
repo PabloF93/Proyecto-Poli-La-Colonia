@@ -5,6 +5,7 @@
  */
 package proyectopolilacolonia;
 
+import Interfaces.PantallaPrincipal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Scanner;
@@ -20,7 +21,9 @@ public class ProyectoPoliLaColonia {
      */
     public static void main(String[] args) {
         
-        
+        PantallaPrincipal pp1 = new PantallaPrincipal();
+        pp1.setLocationRelativeTo(null);
+        pp1.setVisible(true);
         
         
     }

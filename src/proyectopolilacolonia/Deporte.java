@@ -113,7 +113,7 @@ public class Deporte extends Entidad{
     public void delete(int id) {
         conn = MySql.getConnection();
         try {
-            ps = conn.prepareStatement("UPDATE deportes SET deleted=false WHERE id=?");
+            ps = conn.prepareStatement("UPDATE deportes SET deleted=true WHERE id=?");
             ps.setInt(1, id);
             
             int resultado = ps.executeUpdate();
