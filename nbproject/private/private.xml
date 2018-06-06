@@ -5,16 +5,16 @@
         <group>
             <file>file:/C:/Users/Pablo2/Documents/NetBeansProjects/ProyectoPoliLaColonia/src/proyectopolilacolonia/Profesor.java</file>
             <file>file:/C:/Users/Pablo2/Documents/NetBeansProjects/ProyectoPoliLaColonia/src/proyectopolilacolonia/Alumno.java</file>
-            <file>file:/C:/Users/Pablo2/Documents/NetBeansProjects/ProyectoPoliLaColonia/src/Interfaces/Alumno_CRUD.java</file>
             <file>file:/C:/Users/Pablo2/Documents/NetBeansProjects/ProyectoPoliLaColonia/src/proyectopolilacolonia/Clase.java</file>
             <file>file:/C:/Users/Pablo2/Documents/NetBeansProjects/ProyectoPoliLaColonia/src/proyectopolilacolonia/Registro.java</file>
             <file>file:/C:/Users/Pablo2/Documents/NetBeansProjects/ProyectoPoliLaColonia/src/proyectopolilacolonia/Inscripcion.java</file>
             <file>file:/C:/Users/Pablo2/Documents/NetBeansProjects/ProyectoPoliLaColonia/src/proyectopolilacolonia/Deporte.java</file>
             <file>file:/C:/Users/Pablo2/Documents/NetBeansProjects/ProyectoPoliLaColonia/src/Interfaces/PantallaPrincipal.java</file>
             <file>file:/C:/Users/Pablo2/Documents/NetBeansProjects/ProyectoPoliLaColonia/src/proyectopolilacolonia/Contacto.java</file>
-            <file>file:/C:/Users/Pablo2/Documents/NetBeansProjects/ProyectoPoliLaColonia/src/Interfaces/Profesor_CRUD.java</file>
             <file>file:/C:/Users/Pablo2/Documents/NetBeansProjects/ProyectoPoliLaColonia/src/proyectopolilacolonia/Persona.java</file>
+            <file>file:/C:/Users/Pablo2/Documents/NetBeansProjects/ProyectoPoliLaColonia/src/Interfaces/Deporte_CRUD.java</file>
             <file>file:/C:/Users/Pablo2/Documents/NetBeansProjects/ProyectoPoliLaColonia/src/proyectopolilacolonia/Entidad.java</file>
+            <file>file:/C:/Users/Pablo2/Documents/NetBeansProjects/ProyectoPoliLaColonia/src/proyectopolilacolonia/ProyectoPoliLaColonia.java</file>
         </group>
     </open-files>
 </project-private>

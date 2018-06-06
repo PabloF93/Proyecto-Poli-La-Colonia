@@ -8,6 +8,7 @@ package proyectopolilacolonia;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -124,5 +125,76 @@ public class Deporte extends Entidad{
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error: "+e.toString());
         }
+    }
+    
+    //Lista todas las categorias
+    public ResultSet listCategories() {
+        conn = MySql.getConnection();
+        try {
+            ps = conn.prepareStatement("SELECT categorias_de_deportes.id, categorias_de_deportes.nombre, deportes.nombre, categorias_de_deportes.valorCuota, categorias_de_deportes.updated_at FROM categorias_de_deportes INNER JOIN deportes ON categorias_de_deportes.deporte_id=deportes.id WHERE deportes.deleted=false");
+            rs = ps.executeQuery();
+            
+        } catch (Exception e) {
+        }
+        
+        return rs;
+    }
+    
+    //Guarda una categoria del deporte correspondiente
+    public void saveCategory(int deporteId, Categoria categoria) {
+        
+        conn = MySql.getConnection();
+        try {
+            ps = conn.prepareStatement("INSERT INTO categorias_de_deportes(deporte_id, nombre, valorCuota, created_at, updated_at) VALUES(?,?,?,?,?)");
+            ps.setInt(1, deporteId);
+            ps.setString(2, categoria.getNombreCategoria());
+            ps.setDouble(3, categoria.getValorCuota());
+            ps.setTimestamp(4, Timestamp.valueOf(categoria.getCreated_at()));
+            ps.setTimestamp(5, Timestamp.valueOf(categoria.getUpdated_at()));
+            int resultado = ps.executeUpdate();
+            if(resultado==1) {
+                JOptionPane.showMessageDialog(null, "¡Categoría guardada con éxito!");
+            }
+            
+        } catch (Exception e) {
+            
+        }
+        
+    }
+    
+    //Actualiza una categoria
+    public void updateCategory(Categoria categoria) {
+        conn = MySql.getConnection();
+        try {
+            ps = conn.prepareStatement("UPDATE categorias_de_deportes SET nombre=?, valorCuota=?, updated_at=? WHERE id=?");
+            ps.setString(1, categoria.getNombreCategoria());
+            ps.setDouble(2, categoria.getValorCuota());
+            ps.setTimestamp(3, Timestamp.valueOf(categoria.getUpdated_at()));
+            ps.setInt(4, categoria.getId());
+            int resultado = ps.executeUpdate();
+            if(resultado==1) {
+                JOptionPane.showMessageDialog(null, "¡Categoría actualizada con éxito!");
+            }
+            
+            
+        } catch (Exception e) {
+        }
+    }
+    
+    //Eliminar una categoria
+    public void deleteCategory(int categoriaId) {
+        conn = MySql.getConnection();
+        try {
+            ps = conn.prepareStatement("DELETE FROM categorias_de_deportes WHERE id=?");
+            ps.setInt(1, categoriaId);
+            int resultado = ps.executeUpdate();
+            if(resultado==1) {
+                JOptionPane.showMessageDialog(null, "¡Categoría eliminada con éxito!");
+            }
+            
+            
+        } catch (Exception e) {
+        }
+        
     }
 }
