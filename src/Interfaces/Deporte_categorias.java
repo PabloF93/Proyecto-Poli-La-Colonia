@@ -5,17 +5,62 @@
  */
 package Interfaces;
 
+import java.sql.ResultSet;
+import java.time.LocalDateTime;
+import javax.swing.table.DefaultTableModel;
+import proyectopolilacolonia.Categoria;
+import proyectopolilacolonia.Deporte;
+
 /**
  *
  * @author Pablo2
  */
 public class Deporte_categorias extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Deporte_categorias
-     */
+    private ResultSet rs = null;
+    
     public Deporte_categorias() {
         initComponents();
+        
+        this.refrescarDeportes();
+        this.refrescarCategorias();
+    }
+    
+    private void refrescarDeportes() {
+        rs = new Deporte().list();
+        this.CBox_nombreDeporte.removeAllItems();
+        
+        try {
+            while(rs.next()) {
+                this.CBox_nombreDeporte.addItem(rs.getString(2));
+                
+            }
+            
+        } catch (Exception e) {
+        }
+        
+    }
+    
+    private void refrescarCategorias() {
+        DefaultTableModel modelo = (DefaultTableModel) this.JTable_categorias.getModel();
+        int cantCols = modelo.getColumnCount();
+        modelo.setRowCount(0);
+        
+        rs = new Deporte().listCategories();
+        
+        try {
+            while(rs.next()) {
+                Object[] fila = new Object[cantCols];
+                
+                for (int i = 0; i < cantCols; i++) {
+                    fila[i] = rs.getObject(i+1);
+                }
+                
+                modelo.addRow(fila);
+            }
+        } catch (Exception e) {
+        }
+        
     }
 
     /**
@@ -31,14 +76,14 @@ public class Deporte_categorias extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        TxtField_nombreCategoria = new javax.swing.JTextField();
+        TxtField_precio = new javax.swing.JTextField();
+        CBox_nombreDeporte = new javax.swing.JComboBox<>();
+        Btn_registrar = new javax.swing.JButton();
+        Btn_editar = new javax.swing.JButton();
+        Btn_eliminar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        JTable_categorias = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -50,30 +95,31 @@ public class Deporte_categorias extends javax.swing.JFrame {
 
         jLabel4.setText("Listado de categorías:");
 
-        jTextField1.setText("jTextField1");
+        CBox_nombreDeporte.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jTextField2.setText("jTextField2");
+        Btn_registrar.setText("Registrar");
+        Btn_registrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_registrarActionPerformed(evt);
+            }
+        });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        Btn_editar.setText("Editar");
 
-        jButton1.setText("jButton1");
+        Btn_eliminar.setText("Eliminar");
 
-        jButton2.setText("jButton2");
-
-        jButton3.setText("jButton3");
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        JTable_categorias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nº", "Categoría", "Deporte", "Precio de la cuota", "Ultima vez modificado..."
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(JTable_categorias);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -90,15 +136,15 @@ public class Deporte_categorias extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
-                                .addComponent(jTextField2))
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(TxtField_nombreCategoria)
+                                .addComponent(TxtField_precio, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE))
+                            .addComponent(CBox_nombreDeporte, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(Btn_registrar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
+                        .addComponent(Btn_editar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3))
+                        .addComponent(Btn_eliminar))
                     .addComponent(jLabel4)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -109,20 +155,20 @@ public class Deporte_categorias extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TxtField_nombreCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TxtField_precio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CBox_nombreDeporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(Btn_registrar)
+                    .addComponent(Btn_editar)
+                    .addComponent(Btn_eliminar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -132,6 +178,23 @@ public class Deporte_categorias extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void Btn_registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_registrarActionPerformed
+        Deporte d1 = new Deporte().find(this.CBox_nombreDeporte.getSelectedItem().toString());
+        String nombreCategoria = this.TxtField_nombreCategoria.getText().trim();
+        float precio = Float.valueOf(this.TxtField_precio.getText().trim());
+        precio = (float) Math.floor(precio*100)/100;
+        
+        Categoria c1 = new Categoria();
+        c1.setNombreCategoria(nombreCategoria);
+        c1.setValorCuota(precio);
+        c1.setCreated_at(LocalDateTime.now());
+        c1.setUpdated_at(LocalDateTime.now());
+        
+        d1.saveCategory(d1.getId(), c1);
+        
+        this.refrescarCategorias();
+    }//GEN-LAST:event_Btn_registrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -169,17 +232,17 @@ public class Deporte_categorias extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton Btn_editar;
+    private javax.swing.JButton Btn_eliminar;
+    private javax.swing.JButton Btn_registrar;
+    private javax.swing.JComboBox<String> CBox_nombreDeporte;
+    private javax.swing.JTable JTable_categorias;
+    private javax.swing.JTextField TxtField_nombreCategoria;
+    private javax.swing.JTextField TxtField_precio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }

@@ -21,6 +21,15 @@ public class Deporte extends Entidad{
 
     private String nombreDeporte;
     private List<Categoria> categoriaList = new ArrayList();
+    private Categoria categoria;
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
     private Boolean deleted = false;
 
     public void setDeleted(Boolean deleted) {
@@ -78,9 +87,12 @@ public class Deporte extends Entidad{
             ps = conn.prepareStatement("SELECT * FROM deportes WHERE nombre=? AND deleted=false");
             ps.setString(1, nombre);
             
-            d1.setId(rs.getInt(1));
-            d1.setNombreDeporte(rs.getString(2));
+            rs = ps.executeQuery();
             
+            while(rs.next()) {
+                d1.setId(rs.getInt(1));
+                d1.setNombreDeporte(rs.getString(2));
+            }
             
             
         } catch (Exception e) {
