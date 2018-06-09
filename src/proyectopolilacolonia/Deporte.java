@@ -152,6 +152,40 @@ public class Deporte extends Entidad{
         return rs;
     }
     
+    //Muestra las categorias de un deporte en particular.
+    public ResultSet findCategories(int deporteId) {
+        conn = MySql.getConnection();
+        try {
+            ps = conn.prepareStatement("SELECT id, nombre, valorCuota FROM categorias_de_deportes WHERE deporte_id=?");
+            ps.setInt(1, deporteId);
+            rs = ps.executeQuery();
+            
+            
+        } catch (Exception e) {
+        }
+        
+        return rs;
+    }
+    
+    //Recupera una categoría especifica por el nombre.
+    public Categoria findCategory(String nombreCategoria) {
+        categoria = new Categoria();
+        conn = MySql.getConnection();
+        try {
+            ps = conn.prepareStatement("SELECT * FROM categorias_de_deportes WHERE nombre=?");
+            ps.setString(1, nombreCategoria);
+            rs = ps.executeQuery();
+            while(rs.next()) {
+                categoria.setId(rs.getInt(1));
+                categoria.setNombreCategoria(rs.getString(3));
+                categoria.setValorCuota(rs.getFloat(4));
+            }
+        } catch (Exception e) {
+        }
+        return categoria;
+    }
+    
+    
     //Guarda una categoria del deporte correspondiente
     public void saveCategory(int deporteId, Categoria categoria) {
         

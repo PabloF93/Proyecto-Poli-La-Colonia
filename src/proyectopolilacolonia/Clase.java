@@ -64,7 +64,7 @@ public class Clase extends Entidad{
     public ResultSet list() {
         conn = MySql.getConnection();
         try {
-            ps = conn.prepareStatement("SELECT clases.id, profesores.nombreCompleto, deportes.nombre,categorias_de_deportes.nombre, clases.dia_hora FROM clases INNER JOIN profesores ON clases.profesor_id=profesores.id INNER JOIN deportes ON clases.deporte_id=deportes.id INNER JOIN categorias_de_deportes ON clases.categoria_id=categorias_de_deportes.id");
+            ps = conn.prepareStatement("SELECT clases.id, profesores.nombreCompleto, deportes.nombre, categorias_de_deportes.nombre, clases.dia_hora, categorias_de_deportes.valorCuota FROM clases INNER JOIN profesores ON clases.profesor_id=profesores.id INNER JOIN deportes ON clases.deporte_id=deportes.id INNER JOIN categorias_de_deportes ON clases.categoria_id=categorias_de_deportes.id");
             rs = ps.executeQuery();
             
         } catch (Exception e) {
@@ -79,7 +79,7 @@ public class Clase extends Entidad{
     public void save(Clase clase) {
         conn = MySql.getConnection();
         try {
-            ps = conn.prepareStatement("INSERT INTO clases(profesor_id, deporte_id, categoria_id, dia_hora) VALUES(?,?,?)");
+            ps = conn.prepareStatement("INSERT INTO clases(profesor_id, deporte_id, categoria_id, dia_hora) VALUES(?,?,?,?)");
             ps.setInt(1, clase.getEntrenador().getId());
             ps.setInt(2, clase.getDeporte().getId());
             ps.setInt(3, clase.getCategoria().getId());

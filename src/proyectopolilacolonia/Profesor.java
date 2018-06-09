@@ -51,7 +51,7 @@ public class Profesor extends Persona{
     public ResultSet list() {
         conn = MySql.getConnection();
         try {
-            ps = conn.prepareStatement("SELECT * FROM profesores WHERE deleted = false ORDER BY nombreCompleto");
+            ps = conn.prepareStatement("SELECT * FROM profesores WHERE deleted=false ORDER BY nombreCompleto");
             rs = ps.executeQuery();
             
         } catch (Exception e) {
@@ -61,7 +61,7 @@ public class Profesor extends Persona{
         return rs;
     }
     
-    //Devuelve un profesor en particular.
+    //Devuelve un profesor por el dni
     public Profesor find(String dni) {
         Profesor p1 = new Profesor();
         conn = MySql.getConnection();
@@ -93,6 +93,36 @@ public class Profesor extends Persona{
         return p1;
     }
     
+    public Profesor findByName(String nombreProfesor) {
+        Profesor p1 = new Profesor();
+        conn = MySql.getConnection();
+        
+        try {
+            ps = conn.prepareStatement("SELECT * FROM profesores WHERE nombreCompleto=? AND deleted=false");
+            ps.setString(1, nombreProfesor);
+            
+            rs = ps.executeQuery();
+            
+            while(rs.next()) {
+                p1.setId(rs.getInt(1));
+                p1.setDni(rs.getString(2));
+                p1.setCodTarjeta(rs.getString(3));
+                p1.setNombreCompleto(rs.getString(4));
+                p1.setFechaNacimiento(rs.getDate(5).toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+                p1.setSexo(rs.getString(6));
+                p1.setCreated_at(LocalDateTime.ofInstant(rs.getTimestamp(7).toInstant(), ZoneId.systemDefault()));
+                p1.setUpdated_at(LocalDateTime.ofInstant(rs.getTimestamp(8).toInstant(), ZoneId.systemDefault()));
+    
+                
+            }
+            
+        } catch (Exception e) {
+            //JOptionPane.showMessageDialog(null, "Error: "+e.toString(), "¡Error!", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
+        return p1;
+    }
     //Guarda un profesor
     public void save(Profesor p) {
         conn = MySql.getConnection();
