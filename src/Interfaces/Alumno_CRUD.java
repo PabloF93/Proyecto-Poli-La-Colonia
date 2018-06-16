@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.time.ZoneId;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,6 +41,8 @@ public class Alumno_CRUD extends javax.swing.JFrame {
         
         this.limpiar();
         this.RefrescarTabla();
+        
+        
         
     }
     
@@ -79,7 +82,7 @@ public class Alumno_CRUD extends javax.swing.JFrame {
         this.TxtField_dni.setText("");
         this.TxtField_nombre.setText("");
         this.RButton_masculino.setSelected(true);
-        this.Dpicker_fecha.setDate(null);
+        //this.Dpicker_fecha.setDate(null);
         this.TxtField_nombre.requestFocus();
         
         
@@ -120,7 +123,6 @@ public class Alumno_CRUD extends javax.swing.JFrame {
         RButton_masculino = new javax.swing.JRadioButton();
         RButton_femenino = new javax.swing.JRadioButton();
         RButton_otro = new javax.swing.JRadioButton();
-        Dpicker_fecha = new org.jdesktop.swingx.JXDatePicker();
         Btn_registrar = new javax.swing.JButton();
         Btn_editar = new javax.swing.JButton();
         Btn_eliminar = new javax.swing.JButton();
@@ -130,6 +132,12 @@ public class Alumno_CRUD extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         TxtField_buscarPorDni = new javax.swing.JTextField();
         Btn_buscar = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        CBox_año = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
+        CBox_mes = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
+        CBox_dia = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -207,6 +215,19 @@ public class Alumno_CRUD extends javax.swing.JFrame {
             }
         });
 
+        jLabel6.setText("Año:");
+
+        CBox_año.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1960", "1961", "1962", "1963", "1964", "1965", "1966", "1967", "1968", "1969", "1970", "1971", "1972", "1973", "1974", "1975", "1976", "1977", "1978", "1979", "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987", "1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031", "2032", "2033", "2034", "2035", "2036", "2037", "2038", "2039", "2040", "2041", "2042", "2043", "2044", "2045", "2046", "2047", "2048", "2049", "2050" }));
+        CBox_año.setSelectedIndex(30);
+
+        jLabel7.setText("Mes:");
+
+        CBox_mes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" }));
+
+        jLabel8.setText("Día:");
+
+        CBox_dia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -214,7 +235,7 @@ public class Alumno_CRUD extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -226,13 +247,24 @@ public class Alumno_CRUD extends javax.swing.JFrame {
                             .addComponent(TxtField_nombre)
                             .addComponent(TxtField_dni)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(RButton_masculino)
+                                .addComponent(RButton_masculino, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(RButton_femenino, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(RButton_otro, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(RButton_femenino)
+                                .addComponent(CBox_año, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(RButton_otro)
-                                .addGap(0, 85, Short.MAX_VALUE))
-                            .addComponent(Dpicker_fecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(CBox_mes, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(CBox_dia, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addComponent(Btn_cerrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(Btn_registrar)
@@ -243,8 +275,8 @@ public class Alumno_CRUD extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(TxtField_buscarPorDni, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(TxtField_buscarPorDni)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Btn_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -269,13 +301,18 @@ public class Alumno_CRUD extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(Dpicker_fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel6)
+                    .addComponent(CBox_año, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7)
+                    .addComponent(CBox_mes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
+                    .addComponent(CBox_dia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Btn_registrar)
                     .addComponent(Btn_editar)
                     .addComponent(Btn_eliminar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(TxtField_buscarPorDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -291,7 +328,7 @@ public class Alumno_CRUD extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Btn_registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_registrarActionPerformed
-        if(this.TxtField_nombre.getText() == "" || this.TxtField_dni.getText() == "" || this.Dpicker_fecha.getDate() == null) {
+        if(this.TxtField_nombre.getText() == "" || this.TxtField_dni.getText() == ""/*this.Dpicker_fecha.getDate() == null*/) {
             JOptionPane.showMessageDialog(this, "¡Todos los campos son obligatorios!", "¡Error!", JOptionPane.ERROR_MESSAGE);
         } else {
 //            this.validarCampos(TxtField_dni.getText().trim(), TxtField_nombre.getText().trim());
@@ -299,12 +336,46 @@ public class Alumno_CRUD extends javax.swing.JFrame {
             
             Alumno alumno = new Alumno();
             String codTarjeta = this.TxtField_dni.getText().trim() + this.TxtField_nombre.getText().trim();
-            LocalDate fechaNacimiento = this.Dpicker_fecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            int ano = Integer.valueOf(this.CBox_año.getSelectedItem().toString());
+            int mes = 1;
+            int dia = Integer.valueOf(this.CBox_dia.getSelectedItem().toString());
+            
+            switch(this.CBox_mes.getSelectedItem().toString()) {
+                case "Enero":mes=1;
+                break;
+                case "Febrero":mes=2;
+                break;
+                case "Marzo":mes=3;
+                break;
+                case "Abril":mes=4;
+                break;
+                case "Mayo":mes=5;
+                break;
+                case "Junio":mes=6;
+                break;
+                case "Julio":mes=7;
+                break;
+                case "Agosto":mes=8;
+                break;
+                case "Septiembre":mes=9;
+                break;
+                case "Octubre":mes=10;
+                break;
+                case "Noviembre":mes=11;
+                break;
+                case "Diciembre":mes=12;
+                break;
+            }
+            
+            LocalDate fechaNacimiento = LocalDate.of(ano, mes, dia);
+            
+            //LocalDate fechaNacimiento = this.Dpicker_fecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             //LocalDate fechaNacimiento = LocalDate.now();
             alumno.setDni(this.TxtField_dni.getText().trim());
             alumno.setCodTarjeta(codTarjeta);
             alumno.setNombreCompleto(this.TxtField_nombre.getText().trim());
             alumno.setFechaNacimiento(fechaNacimiento);
+            //alumno.setFechaNacimiento(fechaNacimiento);
             
             if(this.RButton_masculino.isSelected()) {
                 alumno.setSexo(this.RButton_masculino.getText());
@@ -344,8 +415,38 @@ public class Alumno_CRUD extends javax.swing.JFrame {
         } else {
             this.RButton_otro.setSelected(true);
         }
+        String fechaNacimiento = a2.getFechaNacimiento().toString();
+        String[] fechas = fechaNacimiento.split("-");
+        this.CBox_año.setSelectedItem(fechas[0]);
+        this.CBox_dia.setSelectedItem(fechas[2]);
+        switch(fechas[1]) {
+            case "01": this.CBox_mes.setSelectedIndex(0);
+            break;
+            case "02": this.CBox_mes.setSelectedIndex(1);
+            break;
+            case "03": this.CBox_mes.setSelectedIndex(2);
+            break;
+            case "04": this.CBox_mes.setSelectedIndex(3);
+            break;
+            case "05": this.CBox_mes.setSelectedIndex(4);
+            break;
+            case "06": this.CBox_mes.setSelectedIndex(5);
+            break;
+            case "07": this.CBox_mes.setSelectedIndex(6);
+            break;
+            case "08": this.CBox_mes.setSelectedIndex(7);
+            break;
+            case "09": this.CBox_mes.setSelectedIndex(8);
+            break;
+            case "10": this.CBox_mes.setSelectedIndex(9);
+            break;
+            case "11": this.CBox_mes.setSelectedIndex(10);
+            break;
+            case "12": this.CBox_mes.setSelectedIndex(11);
+            break;
+        }
         
-        this.Dpicker_fecha.setDate(Date.valueOf(a2.getFechaNacimiento()));
+        //this.Dpicker_fecha.setDate(Date.valueOf(a2.getFechaNacimiento()));
         
     }//GEN-LAST:event_JTable_alumnosMouseClicked
 
@@ -360,7 +461,41 @@ public class Alumno_CRUD extends javax.swing.JFrame {
         Alumno a1 = new Alumno();
         a1.setNombreCompleto(this.TxtField_nombre.getText().trim());
         a1.setDni(this.TxtField_dni.getText().trim());
-        a1.setFechaNacimiento(this.Dpicker_fecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        
+        int ano = Integer.valueOf(this.CBox_año.getSelectedItem().toString());
+        int dia = Integer.valueOf(this.CBox_dia.getSelectedItem().toString());
+        int mes = 0;
+        
+        switch(this.CBox_mes.getSelectedItem().toString()) {
+                case "Enero":mes=1;
+                break;
+                case "Febrero":mes=2;
+                break;
+                case "Marzo":mes=3;
+                break;
+                case "Abril":mes=4;
+                break;
+                case "Mayo":mes=5;
+                break;
+                case "Junio":mes=6;
+                break;
+                case "Julio":mes=7;
+                break;
+                case "Agosto":mes=8;
+                break;
+                case "Septiembre":mes=9;
+                break;
+                case "Octubre":mes=10;
+                break;
+                case "Noviembre":mes=11;
+                break;
+                case "Diciembre":mes=12;
+                break;
+            }
+        
+        LocalDate fechaNacimiento = LocalDate.of(ano, mes, dia);
+        a1.setFechaNacimiento(fechaNacimiento);
+        //a1.setFechaNacimiento(this.Dpicker_fecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
         
         if(this.RButton_masculino.isSelected()) {
             a1.setSexo(this.RButton_masculino.getText());
@@ -447,7 +582,9 @@ public class Alumno_CRUD extends javax.swing.JFrame {
     private javax.swing.JButton Btn_editar;
     private javax.swing.JButton Btn_eliminar;
     private javax.swing.JButton Btn_registrar;
-    private org.jdesktop.swingx.JXDatePicker Dpicker_fecha;
+    private javax.swing.JComboBox<String> CBox_año;
+    private javax.swing.JComboBox<String> CBox_dia;
+    private javax.swing.JComboBox<String> CBox_mes;
     private javax.swing.JTable JTable_alumnos;
     private javax.swing.JRadioButton RButton_femenino;
     private javax.swing.JRadioButton RButton_masculino;
@@ -460,6 +597,9 @@ public class Alumno_CRUD extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

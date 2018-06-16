@@ -123,6 +123,7 @@ public class Alumno extends Persona {
             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error: "+e.toString(), "¡Error!", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
         }
         
         

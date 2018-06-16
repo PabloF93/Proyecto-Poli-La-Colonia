@@ -7,6 +7,7 @@ package Interfaces;
 
 import java.sql.Date;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import javax.swing.JOptionPane;
@@ -61,7 +62,7 @@ public class Profesor_CRUD extends javax.swing.JFrame {
     private void limpiar() {
         this.TxtField_dni.setText("");
         this.TxtField_nombre.setText("");
-        this.JDPicker_fechaNacimiento.setDate(null);
+        //this.JDPicker_fechaNacimiento.setDate(null);
         this.RButton_masculino.setSelected(true);
         this.TxtField_buscarDni.setText("");
         
@@ -87,7 +88,6 @@ public class Profesor_CRUD extends javax.swing.JFrame {
         RButton_masculino = new javax.swing.JRadioButton();
         RButton_femenino = new javax.swing.JRadioButton();
         RButton_otro = new javax.swing.JRadioButton();
-        JDPicker_fechaNacimiento = new org.jdesktop.swingx.JXDatePicker();
         Btn_registrar = new javax.swing.JButton();
         Btn_editar = new javax.swing.JButton();
         Btn_eliminar = new javax.swing.JButton();
@@ -97,6 +97,12 @@ public class Profesor_CRUD extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         TxtField_buscarDni = new javax.swing.JTextField();
         Btn_buscar = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        CBox_año = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
+        CBox_mes = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
+        CBox_dia = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -164,6 +170,19 @@ public class Profesor_CRUD extends javax.swing.JFrame {
             }
         });
 
+        jLabel6.setText("Año:");
+
+        CBox_año.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1960", "1961", "1962", "1963", "1964", "1965", "1966", "1967", "1968", "1969", "1970", "1971", "1972", "1973", "1974", "1975", "1976", "1977", "1978", "1979", "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987", "1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031", "2032", "2033", "2034", "2035", "2036", "2037", "2038", "2039", "2040", "2041", "2042", "2043", "2044", "2045", "2046", "2047", "2048", "2049", "2050" }));
+        CBox_año.setSelectedIndex(30);
+
+        jLabel7.setText("Mes:");
+
+        CBox_mes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" }));
+
+        jLabel8.setText("Día:");
+
+        CBox_dia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -172,7 +191,7 @@ public class Profesor_CRUD extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Btn_cerrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -190,7 +209,18 @@ public class Profesor_CRUD extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(RButton_otro)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(JDPicker_fechaNacimiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(CBox_año, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(CBox_mes, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(CBox_dia, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
@@ -231,7 +261,13 @@ public class Profesor_CRUD extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(JDPicker_fechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel6)
+                        .addComponent(CBox_año, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel7)
+                        .addComponent(CBox_mes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel8)
+                        .addComponent(CBox_dia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Btn_registrar)
@@ -242,7 +278,7 @@ public class Profesor_CRUD extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(TxtField_buscarDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Btn_buscar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Btn_cerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -254,7 +290,7 @@ public class Profesor_CRUD extends javax.swing.JFrame {
 
     private void Btn_registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_registrarActionPerformed
         
-        if(this.TxtField_nombre.getText() == "" || this.TxtField_dni.getText() == "" || this.JDPicker_fechaNacimiento.getDate()==null) {
+        if(this.TxtField_nombre.getText() == "" || this.TxtField_dni.getText() == "" /*|| this.JDPicker_fechaNacimiento.getDate()==null*/) {
             JOptionPane.showMessageDialog(this, "¡Los campos no pueden estar vacios!", "¡Error!", JOptionPane.ERROR_MESSAGE);
         } else {
             
@@ -271,7 +307,38 @@ public class Profesor_CRUD extends javax.swing.JFrame {
             } else {
                 p.setSexo(this.RButton_otro.getText());
             }
-            p.setFechaNacimiento(this.JDPicker_fechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+            int ano = Integer.valueOf(this.CBox_año.getSelectedItem().toString());
+            int mes = 1;
+            int dia = Integer.valueOf(this.CBox_dia.getSelectedItem().toString());
+            
+            switch(this.CBox_mes.getSelectedItem().toString()) {
+                case "Enero":mes=1;
+                break;
+                case "Febrero":mes=2;
+                break;
+                case "Marzo":mes=3;
+                break;
+                case "Abril":mes=4;
+                break;
+                case "Mayo":mes=5;
+                break;
+                case "Junio":mes=6;
+                break;
+                case "Julio":mes=7;
+                break;
+                case "Agosto":mes=8;
+                break;
+                case "Septiembre":mes=9;
+                break;
+                case "Octubre":mes=10;
+                break;
+                case "Noviembre":mes=11;
+                break;
+                case "Diciembre":mes=12;
+                break;
+            }
+            p.setFechaNacimiento(LocalDate.of(ano,mes,dia));
+            //p.setFechaNacimiento(this.JDPicker_fechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
             p.setCreated_at(LocalDateTime.now());
             p.setUpdated_at(LocalDateTime.now());
             
@@ -286,7 +353,7 @@ public class Profesor_CRUD extends javax.swing.JFrame {
     }//GEN-LAST:event_Btn_registrarActionPerformed
 
     private void Btn_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_editarActionPerformed
-        if(this.TxtField_nombre.getText() == "" || this.TxtField_dni.getText() == "" || this.JDPicker_fechaNacimiento.getDate()==null) {
+        if(this.TxtField_nombre.getText() == "" || this.TxtField_dni.getText() == "" /*|| this.JDPicker_fechaNacimiento.getDate()==null*/) {
             
         } else {
             Profesor p = new Profesor();
@@ -303,7 +370,40 @@ public class Profesor_CRUD extends javax.swing.JFrame {
                 p.setSexo(this.RButton_otro.getText());
             }
             
-            p.setFechaNacimiento(this.JDPicker_fechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+            int ano = Integer.valueOf(this.CBox_año.getSelectedItem().toString());
+        int dia = Integer.valueOf(this.CBox_dia.getSelectedItem().toString());
+        int mes = 0;
+        
+        switch(this.CBox_mes.getSelectedItem().toString()) {
+                case "Enero":mes=1;
+                break;
+                case "Febrero":mes=2;
+                break;
+                case "Marzo":mes=3;
+                break;
+                case "Abril":mes=4;
+                break;
+                case "Mayo":mes=5;
+                break;
+                case "Junio":mes=6;
+                break;
+                case "Julio":mes=7;
+                break;
+                case "Agosto":mes=8;
+                break;
+                case "Septiembre":mes=9;
+                break;
+                case "Octubre":mes=10;
+                break;
+                case "Noviembre":mes=11;
+                break;
+                case "Diciembre":mes=12;
+                break;
+            }
+        
+            LocalDate fechaNacimiento = LocalDate.of(ano, mes, dia);
+            p.setFechaNacimiento(fechaNacimiento);
+            //p.setFechaNacimiento(this.JDPicker_fechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
             p.setUpdated_at(LocalDateTime.now());
             p.update(p);
             
@@ -337,7 +437,7 @@ public class Profesor_CRUD extends javax.swing.JFrame {
         
         this.TxtField_dni.setText(dni);
         this.TxtField_nombre.setText(nombre);
-        this.JDPicker_fechaNacimiento.setDate(fechaNacimiento);
+        //this.JDPicker_fechaNacimiento.setDate(fechaNacimiento);
         
         if(sexo.equalsIgnoreCase("masculino")) {
             this.RButton_masculino.setSelected(true);
@@ -345,6 +445,37 @@ public class Profesor_CRUD extends javax.swing.JFrame {
             this.RButton_femenino.setSelected(true);
         } else {
             this.RButton_otro.setSelected(true);
+        }
+        
+        String fecha = fechaNacimiento.toString();
+        String[] fechas = fecha.split("-");
+        this.CBox_año.setSelectedItem(fechas[0]);
+        this.CBox_dia.setSelectedItem(fechas[2]);
+        switch(fechas[1]) {
+            case "01": this.CBox_mes.setSelectedIndex(0);
+            break;
+            case "02": this.CBox_mes.setSelectedIndex(1);
+            break;
+            case "03": this.CBox_mes.setSelectedIndex(2);
+            break;
+            case "04": this.CBox_mes.setSelectedIndex(3);
+            break;
+            case "05": this.CBox_mes.setSelectedIndex(4);
+            break;
+            case "06": this.CBox_mes.setSelectedIndex(5);
+            break;
+            case "07": this.CBox_mes.setSelectedIndex(6);
+            break;
+            case "08": this.CBox_mes.setSelectedIndex(7);
+            break;
+            case "09": this.CBox_mes.setSelectedIndex(8);
+            break;
+            case "10": this.CBox_mes.setSelectedIndex(9);
+            break;
+            case "11": this.CBox_mes.setSelectedIndex(10);
+            break;
+            case "12": this.CBox_mes.setSelectedIndex(11);
+            break;
         }
         
     }//GEN-LAST:event_JTable_profesoresMouseClicked
@@ -405,7 +536,9 @@ public class Profesor_CRUD extends javax.swing.JFrame {
     private javax.swing.JButton Btn_editar;
     private javax.swing.JButton Btn_eliminar;
     private javax.swing.JButton Btn_registrar;
-    private org.jdesktop.swingx.JXDatePicker JDPicker_fechaNacimiento;
+    private javax.swing.JComboBox<String> CBox_año;
+    private javax.swing.JComboBox<String> CBox_dia;
+    private javax.swing.JComboBox<String> CBox_mes;
     private javax.swing.JTable JTable_profesores;
     private javax.swing.JRadioButton RButton_femenino;
     private javax.swing.JRadioButton RButton_masculino;
@@ -418,6 +551,9 @@ public class Profesor_CRUD extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
