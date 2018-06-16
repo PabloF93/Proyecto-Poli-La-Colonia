@@ -363,10 +363,12 @@ public class Alumno extends Persona {
     public ResultSet listClases(int idAlumno) {
         conn = MySql.getConnection();
         try {
-            ps = conn.prepareStatement("SELECT clase_id FROM alumno_clase WHERE alumno_id=?");
+            ps = conn.prepareStatement("SELECT * FROM alumno_clase WHERE alumno_id=?");
+            ps.setInt(1, idAlumno);
             rs = ps.executeQuery();
             
         } catch (Exception e) {
+            e.printStackTrace();
         }
         
         return rs;
