@@ -6,6 +6,7 @@
 package proyectopolilacolonia;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 /**
@@ -13,33 +14,34 @@ import java.time.LocalDate;
  * @author Moron
  */
 public class Inscripcion extends Entidad {
-    private LocalDate fechaInscripcion; //dia mes año minutos y segundos de la inscripcion
+    private LocalDateTime fechaInscripcion; //dia mes año minutos y segundos de la inscripcion
     private int numeroComprobante;
     private Alumno alumno;
-    private Deporte deporte;
-    private Categoria categoria;
+    private Clase clase;
+    //private Deporte deporte;
+    //private Categoria categoria;
 
-    public Deporte getDeporte() {
-        return deporte;
-    }
-
-    public void setDeporte(Deporte deporte) {
-        this.deporte = deporte;
-    }
-
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
+//    public Deporte getDeporte() {
+//        return deporte;
+//    }
+//
+//    public void setDeporte(Deporte deporte) {
+//        this.deporte = deporte;
+//    }
+//
+//    public Categoria getCategoria() {
+//        return categoria;
+//    }
+//
+//    public void setCategoria(Categoria categoria) {
+//        this.categoria = categoria;
+//    }
         
-    public LocalDate getFechaInscripcion() {
+    public LocalDateTime getFechaInscripcion() {
         return fechaInscripcion;
     }
 
-    public void setFechaInscripcion(LocalDate fechaInscripcion) {
+    public void setFechaInscripcion(LocalDateTime fechaInscripcion) {
         this.fechaInscripcion = fechaInscripcion;
     }
 
@@ -61,6 +63,16 @@ public class Inscripcion extends Entidad {
     public void setAlumno(Alumno alumno) {
         this.alumno = alumno;
     }
+
+    public Clase getClase() {
+        return clase;
+    }
+
+    public void setClase(Clase clase) {
+        this.clase = clase;
+    }
+    
+    
  
     
 }

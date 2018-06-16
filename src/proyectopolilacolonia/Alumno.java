@@ -358,5 +358,56 @@ public class Alumno extends Persona {
         }
         
     }
+    
+    //Devuelve las clases a las que esta inscripto un alumno.
+    public ResultSet listClases(int idAlumno) {
+        conn = MySql.getConnection();
+        try {
+            ps = conn.prepareStatement("SELECT clase_id FROM alumno_clase WHERE alumno_id=?");
+            rs = ps.executeQuery();
+            
+        } catch (Exception e) {
+        }
+        
+        return rs;
+    }
+    
+    //Agregar una alumno a una clase.
+    public void addToClase(Inscripcion inscripcion) {
+        conn = MySql.getConnection();
+        try {
+            ps = conn.prepareStatement("INSERT INTO alumno_clase(alumno_id, clase_id, created_at) VALUES(?,?,?)");
+            ps.setInt(1, inscripcion.getAlumno().getId());
+            ps.setInt(2, inscripcion.getClase().getId());
+            ps.setTimestamp(3, Timestamp.valueOf(inscripcion.getFechaInscripcion()));
+            int resultado = ps.executeUpdate();
+            if(resultado==1){
+                JOptionPane.showMessageDialog(null, "¡Alumno inscripto en la clase con éxito!");
+            }
+        
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        
+    }
+    
+    //Eliminar a un alumno de una clase.
+    public void deleteFromClase(int idInscripcion) {
+        conn = MySql.getConnection();
+        try {
+            ps = conn.prepareStatement("DELETE FROM alumno_clase WHERE id=?");
+            ps.setInt(1, idInscripcion);
+            int resultado = ps.executeUpdate();
+            if(resultado==1) {
+                JOptionPane.showMessageDialog(null, "¡Alumno borrado de la clase con éxito!");
+            }
+        } catch (Exception e) {
+        }
+        
+        
+    }
+    
+    
 }
     
