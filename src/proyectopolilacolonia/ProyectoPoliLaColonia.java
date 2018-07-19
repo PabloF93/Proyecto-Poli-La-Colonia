@@ -6,9 +6,8 @@
 package proyectopolilacolonia;
 
 import Interfaces.PantallaPrincipal;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Scanner;
+
+
 
 /**
  *
@@ -16,13 +15,17 @@ import java.util.Scanner;
  */
 public class ProyectoPoliLaColonia {
 
-    /**
-     * @param args the command line arguments
-     */
+    
+    
+    
+
+    
+    
     public static void main(String[] args) {
-        
+       
         PantallaPrincipal pp1 = new PantallaPrincipal();
         pp1.setLocationRelativeTo(null);
+        
         pp1.setVisible(true);
         
         
