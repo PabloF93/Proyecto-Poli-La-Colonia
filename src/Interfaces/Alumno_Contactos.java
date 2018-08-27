@@ -6,6 +6,7 @@
 
 package Interfaces;
 
+import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -142,6 +143,12 @@ public class Alumno_Contactos extends javax.swing.JFrame {
 
         jLabel1.setText("Buiscar alumno por DNI:");
 
+        TxtField_buscarDni.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtField_buscarDniKeyTyped(evt);
+            }
+        });
+
         Btn_buscarDni.setText("Buscar");
         Btn_buscarDni.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -179,6 +186,18 @@ public class Alumno_Contactos extends javax.swing.JFrame {
         jLabel6.setText("Teléfono:");
 
         jLabel7.setText("Vínculo");
+
+        TxtField_nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtField_nombreKeyTyped(evt);
+            }
+        });
+
+        TxtField_telefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtField_telefonoKeyTyped(evt);
+            }
+        });
 
         CBox_vinculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Madre/Padre", "Hermano/a", "Tío/a", "Primo/a", "Marido/esposa", "Abuelo/a", "Amigo/a" }));
 
@@ -427,6 +446,40 @@ public class Alumno_Contactos extends javax.swing.JFrame {
         this.dispose();
         this.setVisible(false);
     }//GEN-LAST:event_Btn_cerrarActionPerformed
+
+    private void TxtField_buscarDniKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtField_buscarDniKeyTyped
+char c = evt.getKeyChar();
+if(c<'0'||c>'9') evt.consume();
+
+    }//GEN-LAST:event_TxtField_buscarDniKeyTyped
+
+    private void TxtField_nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtField_nombreKeyTyped
+       char car = evt.getKeyChar();       
+if((car<'a' || car>'z') && (car<'A' || car>'Z')            
+    && car !='á' //Minúsculas            
+    && car !='é'           
+    && car !='í'           
+    && car !='ó'          
+    && car !='ú'  
+    && car !='Á' //Mayúsculas            
+    && car !='É'           
+    && car !='Í'           
+    && car !='Ó'
+    && car !='Ú'
+    && car !='ñ'
+    && car !='Ñ'    
+    && (car!=(char)KeyEvent.VK_SPACE))
+{     
+  evt.consume();  
+
+}
+
+    }//GEN-LAST:event_TxtField_nombreKeyTyped
+
+    private void TxtField_telefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtField_telefonoKeyTyped
+char c= evt.getKeyChar();
+if(c<'0'||c>'9') evt.consume();
+    }//GEN-LAST:event_TxtField_telefonoKeyTyped
 
     /**
      * @param args the command line arguments

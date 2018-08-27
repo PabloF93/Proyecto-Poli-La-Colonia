@@ -5,6 +5,7 @@
  */
 package Interfaces;
 
+import java.awt.event.KeyEvent;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -169,6 +170,18 @@ public class Alumno_CRUD extends javax.swing.JFrame {
 
         jLabel2.setText("DNI:");
 
+        TxtField_nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtField_nombreKeyTyped(evt);
+            }
+        });
+
+        TxtField_dni.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtField_dniKeyTyped(evt);
+            }
+        });
+
         jLabel3.setText("Sexo: (Editable)");
 
         RButton_masculino.setText("Masculino");
@@ -300,10 +313,11 @@ public class Alumno_CRUD extends javax.swing.JFrame {
                     .addComponent(CBox_dia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Btn_registrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Btn_editar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Btn_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Btn_editar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(Btn_registrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Btn_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -617,6 +631,36 @@ public class Alumno_CRUD extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_Btn_buscarActionPerformed
+
+    private void TxtField_nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtField_nombreKeyTyped
+char car = evt.getKeyChar();       
+if((car<'a' || car>'z') && (car<'A' || car>'Z')            
+    && car !='á' //Minúsculas            
+    && car !='é'           
+    && car !='í'           
+    && car !='ó'          
+    && car !='ú'  
+    && car !='Á' //Mayúsculas            
+    && car !='É'           
+    && car !='Í'           
+    && car !='Ó'
+    && car !='Ú'
+    && car !='ñ'
+    && car !='Ñ'    
+    && (car!=(char)KeyEvent.VK_SPACE))
+{     
+  evt.consume();  
+
+}
+   
+    }//GEN-LAST:event_TxtField_nombreKeyTyped
+
+    private void TxtField_dniKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtField_dniKeyTyped
+char c = evt.getKeyChar();
+        
+        if(c<'0' || c>'9' ) evt.consume();
+     
+    }//GEN-LAST:event_TxtField_dniKeyTyped
 
     /**
      * @param args the command line arguments

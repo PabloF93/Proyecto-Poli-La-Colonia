@@ -148,6 +148,12 @@ public class Alumno_Observaciones extends javax.swing.JFrame {
 
         jLabel2.setText("DNI del alumno:");
 
+        TxtField_buscarDni.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtField_buscarDniKeyTyped(evt);
+            }
+        });
+
         Btn_buscar.setText("Buscar");
         Btn_buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -369,6 +375,11 @@ public class Alumno_Observaciones extends javax.swing.JFrame {
         this.dispose();
         this.setVisible(false);
     }//GEN-LAST:event_Btn_cerrarActionPerformed
+
+    private void TxtField_buscarDniKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtField_buscarDniKeyTyped
+char c = evt.getKeyChar();
+if(c<'0'||c>'9') evt.consume();
+    }//GEN-LAST:event_TxtField_buscarDniKeyTyped
 
     /**
      * @param args the command line arguments

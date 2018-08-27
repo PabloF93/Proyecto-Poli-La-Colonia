@@ -124,6 +124,12 @@ public class Alumno_Clase extends javax.swing.JFrame {
 
         jLabel2.setText("Buscar por DNI:");
 
+        TxtField_buscarDniAlumno.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtField_buscarDniAlumnoKeyTyped(evt);
+            }
+        });
+
         Btn_buscarDniAlumno.setText("Buscar");
         Btn_buscarDniAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -302,6 +308,14 @@ public class Alumno_Clase extends javax.swing.JFrame {
     private void JTable_alumnosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTable_alumnosMouseClicked
         this.refrescarInscripciones();
     }//GEN-LAST:event_JTable_alumnosMouseClicked
+
+    private void TxtField_buscarDniAlumnoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtField_buscarDniAlumnoKeyTyped
+char c = evt.getKeyChar();
+
+if(c<'0' || c>'9') evt.consume();
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtField_buscarDniAlumnoKeyTyped
 
     /**
      * @param args the command line arguments

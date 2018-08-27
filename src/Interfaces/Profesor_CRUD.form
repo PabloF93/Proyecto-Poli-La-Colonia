@@ -117,9 +117,8 @@
                   <Component id="RButton_otro" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                       <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="CBox_año" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -127,6 +126,7 @@
                       <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="CBox_dia" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -171,8 +171,14 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="TxtField_nombre">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TxtField_nombreKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="TxtField_dni">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TxtField_dniKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="RButton_masculino">
       <Properties>
@@ -250,6 +256,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="TxtField_buscarDni">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TxtField_buscarDniKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="Btn_buscar">
       <Properties>

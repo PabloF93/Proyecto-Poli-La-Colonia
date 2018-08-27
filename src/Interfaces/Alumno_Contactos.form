@@ -152,6 +152,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="TxtField_buscarDni">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TxtField_buscarDniKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="Btn_buscarDni">
       <Properties>
@@ -218,8 +221,14 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="TxtField_nombre">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TxtField_nombreKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="TxtField_telefono">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TxtField_telefonoKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="CBox_vinculo">
       <Properties>

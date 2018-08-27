@@ -5,6 +5,7 @@
  */
 package Interfaces;
 
+import java.awt.event.KeyEvent;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.time.LocalDate;
@@ -114,6 +115,18 @@ public class Profesor_CRUD extends javax.swing.JFrame {
 
         jLabel4.setText("Fecha de nacimiento: (Editable)");
 
+        TxtField_nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtField_nombreKeyTyped(evt);
+            }
+        });
+
+        TxtField_dni.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtField_dniKeyTyped(evt);
+            }
+        });
+
         RButton_masculino.setText("Masculino");
 
         RButton_femenino.setText("Femenino");
@@ -162,6 +175,12 @@ public class Profesor_CRUD extends javax.swing.JFrame {
         Btn_cerrar.setText("Cerrar");
 
         jLabel5.setText("Buscar por DNI en el listado:");
+
+        TxtField_buscarDni.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtField_buscarDniKeyTyped(evt);
+            }
+        });
 
         Btn_buscar.setText("Buscar");
         Btn_buscar.addActionListener(new java.awt.event.ActionListener() {
@@ -259,15 +278,15 @@ public class Profesor_CRUD extends javax.swing.JFrame {
                     .addComponent(RButton_femenino)
                     .addComponent(RButton_otro))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel6)
                         .addComponent(CBox_año, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel7)
                         .addComponent(CBox_mes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel8)
-                        .addComponent(CBox_dia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(CBox_dia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Btn_registrar)
@@ -493,6 +512,40 @@ public class Profesor_CRUD extends javax.swing.JFrame {
         
         this.limpiar();
     }//GEN-LAST:event_Btn_buscarActionPerformed
+
+    private void TxtField_nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtField_nombreKeyTyped
+             char car = evt.getKeyChar();       
+if((car<'a' || car>'z') && (car<'A' || car>'Z')            
+    && car !='á' //Minúsculas            
+    && car !='é'           
+    && car !='í'           
+    && car !='ó'          
+    && car !='ú'  
+    && car !='Á' //Mayúsculas            
+    && car !='É'           
+    && car !='Í'           
+    && car !='Ó'
+    && car !='Ú'
+    && car !='ñ'
+    && car !='Ñ'    
+    && (car!=(char)KeyEvent.VK_SPACE))
+{     
+  evt.consume();  
+
+}
+    }//GEN-LAST:event_TxtField_nombreKeyTyped
+
+    private void TxtField_dniKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtField_dniKeyTyped
+char c = evt.getKeyChar();
+if(c<'0'||c>'9') evt.consume();
+     
+    }//GEN-LAST:event_TxtField_dniKeyTyped
+
+    private void TxtField_buscarDniKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtField_buscarDniKeyTyped
+       char c = evt.getKeyChar();
+if(c<'0'||c>'9') evt.consume();
+
+    }//GEN-LAST:event_TxtField_buscarDniKeyTyped
 
     /**
      * @param args the command line arguments
