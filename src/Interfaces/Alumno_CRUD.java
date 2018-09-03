@@ -420,7 +420,8 @@ public class Alumno_CRUD extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Btn_registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_registrarActionPerformed
-        if(this.TxtField_nombre.getText() == "" || this.TxtField_dni.getText() == ""/*this.Dpicker_fecha.getDate() == null*/) {
+        if(this.TxtField_nombre.getText().equals("") || this.TxtField_dni.getText().equals("") || (this.RButton_masculino.isSelected()==false &&
+                this.RButton_femenino.isSelected()==false && this.RButton_otro.isSelected()==false)/*this.Dpicker_fecha.getDate() == null*/) {
             JOptionPane.showMessageDialog(this, "¡Todos los campos son obligatorios!", "¡Error!", JOptionPane.ERROR_MESSAGE);
         } else {
 //            this.validarCampos(TxtField_dni.getText().trim(), TxtField_nombre.getText().trim());
@@ -550,6 +551,13 @@ public class Alumno_CRUD extends javax.swing.JFrame {
     }//GEN-LAST:event_Btn_cerrarActionPerformed
 
     private void Btn_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_editarActionPerformed
+
+if(this.TxtField_nombre.getText().equals("") || this.TxtField_dni.getText().equals("") || (this.RButton_masculino.isSelected()==false &&
+                this.RButton_femenino.isSelected()==false && this.RButton_otro.isSelected()==false)) {
+            JOptionPane.showMessageDialog(this, "¡No se puede editar" 
+                    + System.getProperty("line.separator") + "Todos los campos son obligatorios!", "¡Error!", JOptionPane.ERROR_MESSAGE);
+        }
+else{
         Alumno a1 = new Alumno();
         a1.setNombreCompleto(this.TxtField_nombre.getText().trim());
         a1.setDni(this.TxtField_dni.getText().trim());
@@ -604,7 +612,7 @@ public class Alumno_CRUD extends javax.swing.JFrame {
         this.RefrescarTabla();
         this.limpiar();
     }//GEN-LAST:event_Btn_editarActionPerformed
-
+}
     private void Btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_eliminarActionPerformed
         int result = JOptionPane.showConfirmDialog(this, "¿Estas seguro que quieres eliminar este usuario?");
         if(result == JOptionPane.YES_NO_OPTION) {

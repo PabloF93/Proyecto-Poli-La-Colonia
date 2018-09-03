@@ -112,6 +112,9 @@
     <Component class="javax.swing.JTextField" name="TxtField_nombreCategoria">
     </Component>
     <Component class="javax.swing.JTextField" name="TxtField_precio">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TxtField_precioKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="CBox_nombreDeporte">
       <Properties>

@@ -95,6 +95,12 @@ public class Deporte_categorias extends javax.swing.JFrame {
 
         jLabel4.setText("Listado de categorías:");
 
+        TxtField_precio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtField_precioKeyTyped(evt);
+            }
+        });
+
         CBox_nombreDeporte.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         Btn_registrar.setText("Registrar");
@@ -195,6 +201,13 @@ public class Deporte_categorias extends javax.swing.JFrame {
         
         this.refrescarCategorias();
     }//GEN-LAST:event_Btn_registrarActionPerformed
+
+    private void TxtField_precioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtField_precioKeyTyped
+char c = evt.getKeyChar();
+if((c<'0' || c>'9') && c!='.') evt.consume();
+
+// TODO add your handling code here:
+    }//GEN-LAST:event_TxtField_precioKeyTyped
 
     /**
      * @param args the command line arguments
